@@ -1,0 +1,33 @@
+Notes on getting started with TODO LIST project.
+
+- I want to use constructor/classes for an OOP style as opposed to functional style, for todo object creation.
+
+- My todo list items should contain properties for:
+    title
+    description
+    dueDate
+    priority
+    *optional: notes
+    *optional: checklist
+
+- I want "projects" that each group their own todo lists.
+
+- Users can create projects, todos, assign todos to projects. There must be a default project if none is selected.
+
+- Need separate modules for application logic and DOM manipulation.
+
+- UI minimum requirements:
+    - View all projects.
+    - View all todos in each project (probably just the title and duedate… perhaps changing color for different priorities).
+    - Expand a single todo to see/edit its details.
+    - Delete a todo.
+
+- Install webpack and date-fns (for formatting and manipulating date/time)
+
+- Created projects and todos must be stored in localStorage.
+    - Function to save projects and todos every time one is created.
+    - Function to look for that data in localStorage when the app is first loaded.
+    - Ensure the app doesn't crash if looking for data fails (need a fallback).
+    - To inspect saved data in localStorage in devtools, go to Application tab > Storage > Local Storage.
+    - localStorage uses JSON to send, store and retrieve data. JSON can't store functions, so how will I add methods to my object properties once I fetch them? 
+
