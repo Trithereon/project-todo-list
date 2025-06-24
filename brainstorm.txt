@@ -9,6 +9,7 @@ Notes on getting started with TODO LIST project.
     priority
     *optional: notes
     *optional: checklist
+    *optional: subtasks
 
 - I want "projects" that each group their own todo lists.
 
@@ -31,3 +32,31 @@ Notes on getting started with TODO LIST project.
     - To inspect saved data in localStorage in devtools, go to Application tab > Storage > Local Storage.
     - localStorage uses JSON to send, store and retrieve data. JSON can't store functions, so how will I add methods to my object properties once I fetch them? 
 
+Draft of website structure
+example.com/ (root)
+│
+├── Static Pages
+│   ├── Home (/) 
+│   ├── Contact (/contact.html)
+│
+├── About Section (/about/)
+│   ├── Main About Page
+│   ├── Team Profiles
+│   └── Company Timeline
+│
+├── Services Section (/services/)
+│   ├── Services Overview
+│   ├── Individual Service 1
+│   └── Individual Service 2
+│
+├── Dynamic Content
+│   ├── Blog (/blog/)
+│   │   ├── Blog Listing
+│   │   ├── Blog Post 1
+│   │   └── Blog Post 2
+│   │
+│   └── Portfolio Showcase (/portfolio/)
+│
+└── Legal Pages (/legal/)
+    ├── Privacy Policy
+    └── Terms of Service

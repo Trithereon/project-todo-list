@@ -1,5 +1,5 @@
-Todo List
-for The Odin Project Javascript Course
+<h1>Todo List</h1> 
+<h2>for The Odin Project's JavaScript Course</h2>
 
 <section data-title="assignment">
   <h3 id="assignment"><a href="#assignment" class="anchor-link">Assignment</a></h3>
