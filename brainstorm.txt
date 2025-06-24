@@ -34,13 +34,47 @@ Notes on getting started with TODO LIST project.
 
 Draft of website structure
 
-    I want a sidebar with nav.
+    Sidebar with nav. I'm thinking:
+        User
+        + Add Task
+        Search
+        Projects ("Main Board", homepage)
+        + Add Project
+        -Unassigned tasks
+        -Project1
+        -Project2
 
-    Each task is assigned to a project. Either the default project or a user-created 
-    project but clicking on that project in the task card opens a dropdown menu
-    allowing the user to change the project it's assigned to.
+    The Main Board page or maybe just "Projects" page is the homepage and displays the projects as cards, with task lists.
 
-    Each task card has a little delete button in the bottom right corner
+    Each task is assigned to a project. Either the default project (unassigned tasks) or an existing project. 
+    Project cards list the tasks. The projects can be dragged and dropped, to re-order the main board.
+    The tasks can be dragged and dropped onto a project, to assign them to that project.
+    Alternatively, the task edit section (modal? three dots menu > edit, delete?) has a dropdown with project names.
+
+    Ideas:
+    - Implement HTML5 DnD API for drag and drop.
+    - Drag and drop project cards in 2D to reorder them.
+    - Drag and drop tasks to assign them to a project.
+    - Alternative to drag and drop: task editing window.
+    - Each task is assigned to a project.
+    - Default project "Unassigned tasks" or existing project.
+    - Project cards list the tasks.
+    - Tasks should order by priority.
+    - Task color should be based on priority.
+    - Project color should be randomly assigned.
+    - Project color can be user assigned.
+
+    Step 1
+    HTML and CSS template page.
+
+    Step 2
+    Modules to create tasks:
+        1. Application logic
+        2. DOM Manipulation
+        3. Storage
+
+    Step 3
+    TBD
 
 
 
