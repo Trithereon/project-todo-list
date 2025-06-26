@@ -1,17 +1,51 @@
+:root {
+    /* Primary colors */
+    --color-primary-bg-cream: #FDF6E3;
+    --color-primary-lines-blue: #2563EB;
+    --color-primary-accents-yellow: #F59E0B;
+
+    /* Supporting colors */
+    --color-sup-bigtext-darkblue: #1E3A8A;
+    --color-sup-smalltext-gray: #6B7280;
+    --color-sup-hover-lightblue: #bedaff;
+    --color-sup-bg-white: #FFFFFF;
+    --color-sup-check-green: #10B981;
+    --color-sup-delete-red: #EF4444;
+}
+
 ul {
     list-style: none;
     margin-left: 0;
     padding-left: 0; 
 }
-
 div.main-wrapper {
     display: grid;
-    grid-template-columns: 120px minmax(800px, 100%);
+    grid-template-columns: minmax(120px, 180px) minmax(800px, 100%);
+    gap: 10px;
 }
 button.sidebar-action {
     background: none;
     border: none;
     cursor: pointer;
     text-align: left;
-    padding: 2px;
+    padding: 1px;
+}
+.nav-sub-item {
+    padding-left:18px;
+}
+.sidebar-nav {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.nav-main-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.nav-sub-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    gap: 5px;
 }
