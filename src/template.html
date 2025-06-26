@@ -6,21 +6,46 @@
     <title>Todo list</title>
 </head>
 <body>
+ <div class="main-wrapper">
+<!-- Sidebar -->
     <aside class="sidebar-wrapper">
+        <div class="sidebar-header">
+            <button class="sidebar-action" data-action="home">
+            TODO LIST
+            </button>
+        </div>
         <nav class="sidebar-nav">
-            <div class="sidebar-header">
-                <a href="#"><h1>
-                    TODO LIST
-                </h1></a>
-            </div>
-            <ul class="nav-list">
-                <li class="nav-item">Username</li>
-                <li class="nav-item">+New Task</li>
-                <li class="nav-item">Search</li>
-                <li class="nav-item">Main Board</li>
-                <li class="nav-item">Projects
+            <ul class="nav-main-list">
+                <li class="nav-main-item">
+                    <button class="sidebar-action" data-action="username">
+                        Username
+                    </button>
+                </li>
+                <li class="nav-main-item">
+                    <button class="sidebar-action" data-action="new-task">
+                        +New Task
+                    </button>
+                </li>
+                <li class="nav-main-item">
+                    <button class="sidebar-action" data-action="search">
+                        Search
+                    </button>
+                </li>
+                <li class="nav-main-item">
+                    <button class="sidebar-action" data-action="home">
+                        Main Board
+                    </button>
+                </li>
+                <li class="nav-main-item">
+                    <button class="sidebar-action" data-action="home">
+                        Projects
+                    </button>
                     <ul class="nav-sub-list">
-                        <li class="nav-sub-item">+New Project</li>
+                        <li class="nav-sub-item">
+                            <button class="sidebar-action" data-action="new-project">
+                                +New Project
+                            </button>
+                        </li>
                         <li class="nav-sub-item">Project 1</li>
                         <li class="nav-sub-item">Project 2</li>
                         <li class="nav-sub-item">Project 3</li>
@@ -31,5 +56,10 @@
             </ul>
         </nav>
     </aside>
+<!-- Main Content -->
+    <main class="main-content" id="main-content">
+        The main content resides within this container.
+    </main>
+</div>
 </body>
 </html>
