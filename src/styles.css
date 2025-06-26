@@ -1,7 +1,9 @@
 :root {
     /* Primary colors */
-    --color-primary-bg-white: #FFFFFF;
-    --color-primary-sidebar-bg-blue: #0078d4;
+    --color-primary-white: #FFFFFF;
+    --color-primary-bg-lightcream:#fffefa;
+    /* --color-primary-sidebar-bg-blue: #0078d4; "The over-used blue" */
+    --color-primary-sidebar-bg-blue: #0067b5;
     --color-primary-lines-blue: #2563EB;
     --color-primary-accents-orange: #F59E0B;
     --color-primary-text-darkblue: #1E3A8A;
@@ -15,38 +17,48 @@
 }
 
 body {
-    background-color: var(--color-primary-bg-white);
+    background-color: var(--color-primary-bg-lightcream);
     color: var(--color-primary-text-darkblue);
-}
-ul {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0; 
 }
 div.main-wrapper {
     display: grid;
-    grid-template-columns: minmax(120px, 180px) minmax(800px, 100%);
-    grid-template-rows: 100vh;
+    grid-template-columns: minmax(180px, 250px) minmax(360px, 100%);
+    grid-template-rows: minmax(100vh, 100%);
     gap: 10px;
 }
+
+/* Sidebar styles */
 .sidebar-wrapper {
     border-right: 8px solid var(--color-primary-accents-orange);
     background-color: var(--color-primary-sidebar-bg-blue);
-    color: var(--color-primary-bg-white);
+    color: var(--color-primary-white);
     padding-left: 10px;
     padding-top: 20px;
+    font-size: 1.2rem;
 }
 .sidebar-header button.sidebar-action {
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+}
+.sidebar-header {
+    display: flex;
+}
+img.site-logo {
+    width: 35px;
+}
+ul.nav-main-list, ul.nav-sub-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0; 
 }
 button.sidebar-action {
     background: none;
     border: none;
     cursor: pointer;
     text-align: left;
-    padding: 2px 4px;
+    padding: 0 6px 4px 6px;
     color: inherit;
+    letter-spacing: 1px;
 }
 button.sidebar-action:hover {
     translate: 2px;
@@ -75,4 +87,20 @@ button.sidebar-action:hover {
     flex-direction: column;
     margin-top: 5px;
     gap: 5px;
+}
+
+/* Card styles */
+.main-content {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.card-container {
+    background-color: var(--color-sup-bg-cream);
+    height: max-content;
+    min-width: 150px;
+    max-width: 360px;
+    border-radius: 6px;
+    padding: 0 15px;
 }
