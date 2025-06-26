@@ -1,6 +1,7 @@
 :root {
     /* Primary colors */
-    --color-primary-bg-cream: #FDF6E3;
+    --color-primary-bg-white: #FFFFFF;
+    --color-primary-sidebar-bg-blue: #0078d4;
     --color-primary-lines-blue: #2563EB;
     --color-primary-accents-orange: #F59E0B;
     --color-primary-text-darkblue: #1E3A8A;
@@ -8,13 +9,13 @@
     /* Supporting colors */
     --color-sup-smalltext-gray: #6B7280;
     --color-sup-hover-lightblue: #bedaff;
-    --color-sup-bg-white: #FFFFFF;
+    --color-sup-bg-cream: #FDF6E3;
     --color-sup-check-green: #10B981;
     --color-sup-delete-red: #EF4444;
 }
 
 body {
-    background-color: var(--color-primary-bg-cream);
+    background-color: var(--color-primary-bg-white);
     color: var(--color-primary-text-darkblue);
 }
 ul {
@@ -30,18 +31,31 @@ div.main-wrapper {
 }
 .sidebar-wrapper {
     border-right: 8px solid var(--color-primary-accents-orange);
-    background-color: #3657cd;
-    color: var(--color-primary-bg-cream);
+    background-color: var(--color-primary-sidebar-bg-blue);
+    color: var(--color-primary-bg-white);
     padding-left: 10px;
     padding-top: 20px;
+}
+.sidebar-header button.sidebar-action {
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 button.sidebar-action {
     background: none;
     border: none;
     cursor: pointer;
     text-align: left;
-    padding: 1px;
+    padding: 2px 4px;
     color: inherit;
+}
+button.sidebar-action:hover {
+    translate: 2px;
+    background-color: var(--color-primary-accents-orange);
+    border-radius: 8px;
+}
+#site-title:hover {
+    translate: 0;
+    background-color: inherit;
 }
 .nav-sub-item {
     padding-left:18px;
