@@ -17,7 +17,7 @@
 }
 
 body {
-    background-color: var(--color-primary-bg-lightcream);
+    background-color: var(--color-sup-bg-cream);
     color: var(--color-primary-text-darkblue);
 }
 div.main-wrapper {
@@ -39,6 +39,7 @@ div.main-wrapper {
 .sidebar-header button.sidebar-action {
     font-weight: 700;
     font-size: 1.6rem;
+    background: none;
 }
 .sidebar-header {
     display: flex;
@@ -96,23 +97,32 @@ button.sidebar-action:hover {
     flex-wrap: wrap;
     align-content: flex-start;
     padding-top: 15px;
+    letter-spacing: 1px;
 }
 .card-container {
-    background-color: var(--color-sup-bg-cream);
+    background-color: var(--color-primary-white);
+    /* background-color: var(--color-sup-bg-cream); */
     height: max-content;
     min-width: 150px;
     max-width: 360px;
     border-radius: 6px;
     padding: 0 15px;
-    border: 2px solid var(--color-primary-accents-orange);
-    box-shadow: 1px 2px 5px rgba(197, 127, 8, 1);
+    border-left: 2px solid var(--color-primary-accents-orange);
+    box-shadow: 1px 2px 3px rgba(197, 127, 8, 0.2);
 }
 h3.card-project-title {
-    margin-top: 6px;
+    margin-top: 12px;
     margin-bottom: 0;
     padding-bottom: 0;
     cursor: grab;
+    letter-spacing: 2px;
+    font-weight: 400;
 }
 h3.card-project-title:active {
     cursor: grabbing;
+}
+ul.card-task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
