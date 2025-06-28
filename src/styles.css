@@ -127,3 +127,7 @@ ul.card-task-list {
     flex-direction: column;
     gap: 10px;
 }
+.card-task-item {
+    display: flex;
+    gap: 10px;
+}
