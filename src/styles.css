@@ -129,9 +129,16 @@ ul.card-task-list {
     padding-left: 6px;
 }
 .card-task-item {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1rem 1fr 5rem;
+    gap: 1rem;
+    align-items: bottom;
+}
+.card-actions-container {
+    opacity: 0;
+}
+.card-task-item:hover .card-actions-container {
+    opacity: 0.8;
 }
 a {
     text-decoration: none;
