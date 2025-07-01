@@ -136,6 +136,7 @@ ul.card-task-list {
 }
 .card-actions-container {
     opacity: 0;
+    transition: opacity 200ms ease;
 }
 .card-task-item:hover .card-actions-container {
     opacity: 0.8;
