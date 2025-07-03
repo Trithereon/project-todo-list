@@ -26,7 +26,7 @@ const UI = (() => {
         container.id = project.id;
         mainContent.appendChild(container);
         container.append(title, taskList);
-        taskList.append(addNewTask);
+        taskList.appendChild(addNewTask);
 
         return container;
     }

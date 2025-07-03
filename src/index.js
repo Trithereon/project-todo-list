@@ -48,7 +48,10 @@ renderedProject
 document.getElementById('main-content').addEventListener('click', (e) => {
     // closest() will find the parent with class name specified.
     if (e.target.classList.contains('card-actions-details')) {
-        console.log('you clicked on the details icon!');  
+        // Find parent, details will be next to it, toggle open state.
+        const parent = e.target.closest('.card-actions-container');
+        const details = parent.previousElementSibling;
+        details.open = !details.open;
     }
     else if (e.target.classList.contains('card-actions-edit')) {
         console.log('you clicked on the EDIT button!');
