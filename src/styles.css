@@ -135,6 +135,19 @@ ul.card-task-list {
     gap: 0.8rem;
     align-items: bottom;
 }
+/* Careful, the next rule relies on very specific HTML element usage. 
+Some HTML changes could break this. */
+.card-task-item input[type="checkbox"]:checked + details{
+    color: green;
+    text-decoration: line-through;
+}
+.card-task-item input[type="checkbox"] {
+    accent-color: green;
+}
+.expanded-details-container {
+    display:grid;
+    font-size: 0.6rem;
+}
 .card-task-item.add-new-task {
    text-wrap: nowrap;
    cursor: pointer;
@@ -148,4 +161,12 @@ ul.card-task-list {
 }
 a {
     text-decoration: none;
+}
+
+/* Remove default <details> arrow in both chrome and firefox */
+details > summary:first-of-type {
+    list-style-type: none;
+}
+details summary::-webkit-details-marker {
+  display: none;
 }

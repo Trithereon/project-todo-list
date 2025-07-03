@@ -3,6 +3,7 @@ import Project from './project';
 import './styles.css';
 import 'modern-normalize/modern-normalize.css';
 
+// Tests
 const testTask = new Task(
     'Get your **** together', 
     'Go get all your **** from everywhere you left it and bring it all together',
@@ -29,3 +30,4 @@ testProject.deleteTask(testTask.id);
 console.log("Testing getTaskList() below...")
 console.log(testProject.getTaskList());
 
+// End of tests

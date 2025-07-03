@@ -9,7 +9,9 @@ module.exports = {
     clean: true,
   },
   devServer: {
-    watchFiles: [".src/template.html"],
+    hot: true,
+    liveReload: true,
+    watchFiles: ["./src/template.html"],
   },
   plugins: [
     new HtmlWebpackPlugin({
