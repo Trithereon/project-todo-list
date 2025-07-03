@@ -52,16 +52,18 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const parent = e.target.closest('.card-actions-container');
         const details = parent.previousElementSibling;
         details.open = !details.open;
+        // Consider moving this DOM manipulation to the UI module.
     }
     else if (e.target.classList.contains('card-actions-edit')) {
         console.log('you clicked on the EDIT button!');
     }
     else if (e.target.classList.contains('card-actions-delete')) {
         alert('Are you sure you want to delete this task?');
+        const parent = e.target.closest('.card-actions-container');
+        const grandParent = parent.closest('.card-task-item');
+        grandParent.remove(); // Removal from DOM only
+        // deleteTask from project needs to be added here.
     }
 });
-renderedProject
-  .querySelector('details')
-  .open = true;
 
 console.log(testTask)
