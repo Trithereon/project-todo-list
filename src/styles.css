@@ -144,9 +144,10 @@ Some HTML changes could break this. */
 .card-task-item input[type="checkbox"] {
     accent-color: green;
 }
-.expanded-details-container {
+details .expanded-details-container {
     display:grid;
     font-size: 0.6rem;
+    padding-left: 0.5rem;
 }
 .card-task-item.add-new-task {
    text-wrap: nowrap;
@@ -155,6 +156,9 @@ Some HTML changes could break this. */
 .card-actions-container {
     opacity: 0;
     transition: opacity 200ms ease;
+}
+.card-actions-container img {
+    cursor: pointer;
 }
 .card-task-item:hover .card-actions-container {
     opacity: 0.8;

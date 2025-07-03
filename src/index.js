@@ -1,9 +1,11 @@
+import UI from './ui.js';
 import Task from './task';
 import Project from './project';
 import './styles.css';
 import 'modern-normalize/modern-normalize.css';
 
-// Tests
+
+// Class tests
 const testTask = new Task(
     'Get your **** together', 
     'Go get all your **** from everywhere you left it and bring it all together',
@@ -30,4 +32,33 @@ testProject.deleteTask(testTask.id);
 console.log("Testing getTaskList() below...")
 console.log(testProject.getTaskList());
 
-// End of tests
+console.log('Adding task again, to use in testing UI');
+testProject.addTask(testTask);
+
+// End of class tests
+
+// UI tests
+// UI.renderProject(testProject);
+const renderedProject = UI.renderProject(testProject);
+
+renderedProject
+  .querySelector('.card-task-list')
+  .appendChild(UI.renderTask(testTask));
+
+document.getElementById('main-content').addEventListener('click', (e) => {
+    // closest() will find the parent with class name specified.
+    if (e.target.classList.contains('card-actions-details')) {
+        console.log('you clicked on the details icon!');  
+    }
+    else if (e.target.classList.contains('card-actions-edit')) {
+        console.log('you clicked on the EDIT button!');
+    }
+    else if (e.target.classList.contains('card-actions-delete')) {
+        alert('Are you sure you want to delete this task?');
+    }
+});
+renderedProject
+  .querySelector('details')
+  .open = true;
+
+console.log(testTask)
