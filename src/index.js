@@ -73,13 +73,17 @@ document.getElementById('main-content').addEventListener('click', (e) => {
     }
     else if (e.target.classList.contains('card-actions-delete')) {
         // Consider adding a confirmation modal to make user confirm deletion.
-        const parent = e.target.closest('.card-actions-container');
-        const taskContainer = parent.closest('.card-task-item');
-        const taskListContainer = taskContainer.closest('.card-task-list');
-        const projectContainer = taskListContainer.closest('.card-container');
+        const taskContainer = e.target.closest('.card-task-item');
+        const projectContainer = taskContainer.closest('.card-container');
         const currentProject = projectManager.getProjectById(projectContainer.id);
 
         currentProject.deleteTask(taskContainer.id); // Delete from array.
         taskContainer.remove(); // Delete from DOM.
+    }
+    else if (e.target.name === 'taskComplete') {
+        const taskContainer = e.target.closest('.card-task-item');
+        const projectContainer = taskContainer.closest('.card-container');
+        const currentProject = projectManager.getProjectById(projectContainer.id);
+        currentProject.getTaskById(taskContainer.id).toggleComplete();
     }
 });

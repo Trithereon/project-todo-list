@@ -124,17 +124,17 @@ h3.card-project-title {
 }
 ul.card-task-list {
     display: grid;
-    grid-template-columns: 0.8rem 1fr 4.5rem;
+    grid-template-columns: 0.8rem 1fr 4rem;
     gap: 10px;
     padding-left: 6px;
 }
 .card-task-item {
     display: grid;
     grid-column: span 3;
-    grid-template-columns: 0.8rem 1fr 4.5rem;
+    grid-template-columns: 0.8rem 1fr 4rem;
     gap: 0.8rem;
-    align-items: bottom;
 }
+
 /* Careful, the next rule relies on very specific HTML element usage. 
 Some HTML changes could break this. */
 .card-task-item input[type="checkbox"]:checked + details{
@@ -147,13 +147,15 @@ Some HTML changes could break this. */
 details .expanded-details-container {
     display:grid;
     font-size: 0.6rem;
-    padding-left: 0.5rem;
+    /* padding-left: 0.5rem; */
 }
 .card-task-item.add-new-task {
    text-wrap: nowrap;
    cursor: pointer;
 }
 .card-actions-container {
+    display: flex;
+    justify-content: space-between;
     opacity: 0;
     transition: opacity 200ms ease;
 }

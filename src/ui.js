@@ -48,6 +48,7 @@ const UI = (() => {
         // Assign attributes
         container.id = task.id;
         input.type = 'checkbox';
+        input.name = 'taskComplete'
         dueDate.datetime = task.dueDate; // Need to convert the dueDate value format before assigning here.
         imgDetailsRight.width = '18';
         imgDetailsRight.height = '18';

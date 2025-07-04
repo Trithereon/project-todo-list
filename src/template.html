@@ -57,33 +57,34 @@
     </aside>
 <!-- Main Content -->
     <main class="main-content" id="main-content">
-        <div class="card-container">
-            <h3 class="card-project-title">Project title here</h3>
-            <ul class="card-task-list">
-                <li class="card-task-item add-new-task">+Add new task</li>
-                <!-- Task 1 -->
-                <li class="card-task-item">
-                    <input type="checkbox" id="task-1">
-                    <details>
-                        <summary>Take out the trash</summary>
-                        <div class="expanded-details-container">
-                            <p>
-                                Details: Bring the trash to the curb.
-                            </p>
-                            <time datetime="2025-07-04">Due Date: July 7, 2025</time>
-                            <p class="priority">Priority: High</p>
-                        </div>
-
-                    </details>
-                    <div class="card-actions-container">
-                        <img class="card-actions-details" width="18" height="18" src="img/card/details-right.svg" alt="Details icon">
-                        <img class="card-actions-edit" width="18" height="18" src="img/card/edit.svg" alt="Edit icon">
-                        <img class="card-actions-delete" width="18" height="18" src="img/card/delete.svg" alt="Delete icon">
-                    </div>
-                </li>
-            </ul>
-        </div>
-
+        <dialog>
+            <p>Add New Task</p>
+            <form id="form-add-new-task">
+                <div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required autofocus>
+                </div>
+                <div>
+                    <label for="details">Details:</label>
+                    <input type="text" id="details" name="details">
+                </div>
+                <div>
+                    <label for="dueDate">Due Date:</label>
+                    <input type="datetime" id="dueDate" name="dueDate">
+                </div>
+                <div>
+                    <label for="priority">Priority:</label>
+                    <select id="priority" name="priority">
+                        <option value="" disabled selected>Select an option...</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <button id="submitButton" type="submit">Submit</button>
+                <button id="cancelButton">Cancel</button>
+            </form>
+        </dialog>
     </main>
 </div>
 </body>
