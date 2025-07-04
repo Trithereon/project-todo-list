@@ -3,6 +3,8 @@ import Task from './task';
 import Project from './project';
 import './styles.css';
 import 'modern-normalize/modern-normalize.css';
+import detailsRightImg from './img/card/details-right.svg';
+import detailsDownImg from './img/card/details-down.svg';
 
 
 // Class tests
@@ -52,18 +54,24 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const parent = e.target.closest('.card-actions-container');
         const details = parent.previousElementSibling;
         details.open = !details.open;
+        if (e.target.src === detailsRightImg) {
+            e.target.src = detailsDownImg;
+        } 
+        else e.target.src = detailsRightImg;
         // Consider moving this DOM manipulation to the UI module.
     }
     else if (e.target.classList.contains('card-actions-edit')) {
         console.log('you clicked on the EDIT button!');
     }
     else if (e.target.classList.contains('card-actions-delete')) {
-        alert('Are you sure you want to delete this task?');
+        // Consider adding a confirmation modal to make user confirm deletion.
         const parent = e.target.closest('.card-actions-container');
         const grandParent = parent.closest('.card-task-item');
         grandParent.remove(); // Removal from DOM only
         // deleteTask from project needs to be added here.
+
     }
 });
+
 
 console.log(testTask)

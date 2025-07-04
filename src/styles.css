@@ -163,6 +163,9 @@ details .expanded-details-container {
 .card-task-item:hover .card-actions-container {
     opacity: 0.8;
 }
+.card-task-item details summary {
+    pointer-events: none;
+}
 a {
     text-decoration: none;
 }
