@@ -5,6 +5,7 @@ import './styles.css';
 import 'modern-normalize/modern-normalize.css';
 import detailsRightImg from './img/card/details-right.svg';
 import detailsDownImg from './img/card/details-down.svg';
+import ProjectManager from './project-manager.js';
 
 
 // Class tests
@@ -15,38 +16,44 @@ const testTask = new Task(
     '23 April 2026'
 );
 
-const testProject = new Project('Unassigned tasks');
+const defaultProject = new Project('Unassigned tasks');
+const projectManager = new ProjectManager();
+defaultProject.addTask(testTask);
+projectManager.addProject(defaultProject);
+console.log(projectManager);
+console.log(projectManager.getProjectById(defaultProject.id));
 
-console.log('Adding a task to Project...');
-testProject.addTask(testTask);
-console.log(testProject);
+// console.log('Adding a task to Project...');
+// defaultProject.addTask(testTask);
+// console.log(defaultProject);
 
-console.log('Modifying task title... (uses getTaskById to get task object)');
-testProject.updateTask(
-    testTask.id, 
-    {title: 'Modified title successfully'}
-);
-console.log(testTask);
-console.log(testProject);
+// console.log('Modifying task title... (uses getTaskById to get task object)');
+// defaultProject.updateTask(
+//     testTask.id, 
+//     {title: 'Modified title successfully'}
+// );
+// console.log(testTask);
+// console.log(defaultProject);
 
-console.log('Now deleting the task...');
-testProject.deleteTask(testTask.id);
-console.log("Testing getTaskList() below...")
-console.log(testProject.getTaskList());
+// console.log('Now deleting the task...');
+// defaultProject.deleteTask(testTask.id);
+// console.log("Testing getTaskList() below...")
+// console.log(defaultProject.getTaskList());
 
-console.log('Adding task again, to use in testing UI');
-testProject.addTask(testTask);
+// console.log('Adding task again, to use in testing UI');
+// defaultProject.addTask(testTask);
 
 // End of class tests
 
 // UI tests
-// UI.renderProject(testProject);
-const renderedProject = UI.renderProject(testProject);
+// UI.renderProject(defaultProject);
+const renderedProject = UI.renderProject(defaultProject);
 
 renderedProject
   .querySelector('.card-task-list')
   .appendChild(UI.renderTask(testTask));
 
+// Card action handling
 document.getElementById('main-content').addEventListener('click', (e) => {
     // closest() will find the parent with class name specified.
     if (e.target.classList.contains('card-actions-details')) {
@@ -62,16 +69,17 @@ document.getElementById('main-content').addEventListener('click', (e) => {
     }
     else if (e.target.classList.contains('card-actions-edit')) {
         console.log('you clicked on the EDIT button!');
+        // Maybe the task creation modal opens with default values equal to the current values.
     }
     else if (e.target.classList.contains('card-actions-delete')) {
         // Consider adding a confirmation modal to make user confirm deletion.
         const parent = e.target.closest('.card-actions-container');
-        const grandParent = parent.closest('.card-task-item');
-        grandParent.remove(); // Removal from DOM only
-        // deleteTask from project needs to be added here.
+        const taskContainer = parent.closest('.card-task-item');
+        const taskListContainer = taskContainer.closest('.card-task-list');
+        const projectContainer = taskListContainer.closest('.card-container');
+        const currentProject = projectManager.getProjectById(projectContainer.id);
 
+        currentProject.deleteTask(taskContainer.id); // Delete from array.
+        taskContainer.remove(); // Delete from DOM.
     }
 });
-
-
-console.log(testTask)
