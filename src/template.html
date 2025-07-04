@@ -57,11 +57,11 @@
     </aside>
 <!-- Main Content -->
     <main class="main-content" id="main-content">
-        <dialog>
-            <p>Add New Task</p>
+        <dialog id="dialog-add-new-task">
+            <p>Add New Task (* required)</p>
             <form id="form-add-new-task">
                 <div>
-                    <label for="title">Title:</label>
+                    <label for="title">Title*:</label>
                     <input type="text" id="title" name="title" required autofocus>
                 </div>
                 <div>
@@ -70,12 +70,12 @@
                 </div>
                 <div>
                     <label for="dueDate">Due Date:</label>
-                    <input type="datetime" id="dueDate" name="dueDate">
+                    <input type="datetime-local" id="dueDate" name="dueDate">
                 </div>
                 <div>
                     <label for="priority">Priority:</label>
                     <select id="priority" name="priority">
-                        <option value="" disabled selected>Select an option...</option>
+                        <option value="" disabled selected>Select an option</option>
                         <option value="high">High</option>
                         <option value="medium">Medium</option>
                         <option value="low">Low</option>

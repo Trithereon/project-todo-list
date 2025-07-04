@@ -179,3 +179,38 @@ details > summary:first-of-type {
 details summary::-webkit-details-marker {
   display: none;
 }
+
+/* Form styles */
+dialog {
+    border: none;
+    border-left: 3px solid var(--color-primary-accents-orange);
+    border-right: 3px solid var(--color-primary-accents-orange);
+    border-radius: 30px;
+    box-shadow: 1px 1px 5px var(--color-sup-smalltext-gray);
+}
+form {
+    display: grid;
+    gap: 1rem;
+    border-color: var(--color-primary-accents-orange);
+} 
+form input#details {
+    height: 3rem;
+}
+form button {
+    justify-self: center;
+    background-color: var(--color-primary-sidebar-bg-blue);
+    color: var(--color-primary-bg-lightcream);
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: none;
+    width: 8rem;
+}
+form div {
+    grid-column: span 2;
+}
+form button#submitButton {
+    grid-column: 1 / 2;
+}
+form button#cancelButton {
+    grid-column: 2 / 3;
+}

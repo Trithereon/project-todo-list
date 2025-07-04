@@ -31,13 +31,15 @@ const UI = (() => {
         return container;
     }
 
+    // Might need to modify this function to receive full task list
+    // and render all tasks recursively with an array.forEach method.
     const renderTask = (task) => {
         const container = _createElement('li', 'card-task-item');
         const input = _createElement('input');
         const details = _createElement('details');
         const summary = _createElement('summary', '', task.title);
         const expandedDetailsContainer = _createElement('div', 'expanded-details-container');
-        const taskDescription = _createElement('p', '', `Details: ${task.desc}`);
+        const taskDescription = _createElement('p', '', `Details: ${task.details}`);
         const dueDate = _createElement('time', '', `Due Date: ${task.dueDate}`);
         const priority = _createElement('p', 'priority', `Priority: ${task.priority}`);
         const cardActionsContainer = _createElement('div', 'card-actions-container');
@@ -70,6 +72,7 @@ const UI = (() => {
         cardActionsContainer.append(imgDetailsRight, imgEdit, imgDelete); 
 
         return container;
+
     }
 
     return {renderProject, renderTask};

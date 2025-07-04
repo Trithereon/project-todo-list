@@ -9,16 +9,21 @@ import ProjectManager from './project-manager.js';
 
 
 // Class tests
-const testTask = new Task(
-    'Get your **** together', 
-    'Go get all your **** from everywhere you left it and bring it all together',
-    'High',
-    '23 April 2026'
-);
+// const testTask = new Task(
+//     'Get your **** together', 
+//     'Go get all your **** from everywhere you left it and bring it all together',
+//     'High',
+//     '23 April 2026'
+// );
 
 const defaultProject = new Project('Unassigned tasks');
 const projectManager = new ProjectManager();
-defaultProject.addTask(testTask);
+defaultProject.addTask(
+    'Get your **** together', 
+    'Go get all your **** from everywhere you left it and bring it all together',
+    'High',
+    '2019-09-18T19:00:52Z'
+);
 projectManager.addProject(defaultProject);
 console.log(projectManager);
 console.log(projectManager.getProjectById(defaultProject.id));
@@ -51,12 +56,13 @@ const renderedProject = UI.renderProject(defaultProject);
 
 renderedProject
   .querySelector('.card-task-list')
-  .appendChild(UI.renderTask(testTask));
+  .appendChild(UI.renderTask(defaultProject.getTaskList()[0]));
 
-// Card action handling
+// Button handling (consider changing the structure of this code)
 document.getElementById('main-content').addEventListener('click', (e) => {
     // closest() will find the parent with class name specified.
-    if (e.target.classList.contains('card-actions-details')) {
+    
+    if (e.target.matches('.card-actions-details')) {
         // Find parent, details will be next to it, toggle open state.
         const parent = e.target.closest('.card-actions-container');
         const details = parent.previousElementSibling;
@@ -67,11 +73,11 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         else e.target.src = detailsRightImg;
         // Consider moving this DOM manipulation to the UI module.
     }
-    else if (e.target.classList.contains('card-actions-edit')) {
+    else if (e.target.matches('.card-actions-edit')) {
         console.log('you clicked on the EDIT button!');
         // Maybe the task creation modal opens with default values equal to the current values.
     }
-    else if (e.target.classList.contains('card-actions-delete')) {
+    else if (e.target.matches('.card-actions-delete')) {
         // Consider adding a confirmation modal to make user confirm deletion.
         const taskContainer = e.target.closest('.card-task-item');
         const projectContainer = taskContainer.closest('.card-container');
@@ -85,5 +91,39 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const projectContainer = taskContainer.closest('.card-container');
         const currentProject = projectManager.getProjectById(projectContainer.id);
         currentProject.getTaskById(taskContainer.id).toggleComplete();
+    }
+    else if (e.target.matches('.card-task-item.add-new-task')) {
+        const projectContainer = e.target.closest('.card-container');
+        const dialog = document.getElementById('dialog-add-new-task');
+        dialog.dataset.projectID = projectContainer.id;
+        dialog.showModal();
+    }
+    else if (e.target.id === ('cancelButton')) {
+        document.getElementById('dialog-add-new-task').close();
+    }
+    else if (e.target.id === ('submitButton')) {
+        e.preventDefault();
+        const title = document.getElementById('title').value;
+        const details = document.getElementById('details').value;
+        const priority = document.getElementById('priority').value;
+        const dueDate = document.getElementById('dueDate').value;
+        const dialog = document.getElementById('dialog-add-new-task');
+        const form = document.getElementById('form-add-new-task');
+        const currentProject = projectManager.getProjectById(dialog.dataset.projectID);
+
+        if (!form.checkValidity()){
+            form.reportValidity();
+            return;
+        } 
+
+        // Once the form is validated, proceed.
+        currentProject.addTask(title, details, priority, dueDate);
+        const currentIndex = currentProject.getTaskList().length - 1;
+        renderedProject
+            .querySelector('.card-task-list')
+            .appendChild(UI.renderTask(currentProject.getTaskList()[currentIndex]));
+        form.reset();
+        dialog.close();
+        console.log(currentProject);
     }
 });

@@ -1,3 +1,5 @@
+import Task from "./task";
+
 export default class Project {
     constructor(title) {
         this.title = title;
@@ -5,8 +7,9 @@ export default class Project {
         this.tasks = [];
     }
 
-    addTask(newTask) {
-        this.tasks.push(newTask);
+    addTask(title, details, priority, dueDate) {
+        const task = new Task(title, details, priority, dueDate);
+        this.tasks.push(task);
     }
 
     getTaskList() {
@@ -22,6 +25,7 @@ export default class Project {
 
     updateTask(id, newDetails) {
         const taskToBeUpdated = this.getTaskById(id);
+        // Note: newDetails should be received in a format similar to {title: 'Modified title'}.
         // console.log(taskToBeUpdated);
         // console.log('the above output is "taskToBeUpdated" inside updateTask in Project class');
         taskToBeUpdated.updateDetails(newDetails);
