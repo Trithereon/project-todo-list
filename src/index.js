@@ -115,6 +115,7 @@ document.getElementById('main-content').addEventListener('click', (e) => {
             form.reportValidity();
             return;
         } 
+        
 
         // Once the form is validated, proceed.
         currentProject.addTask(title, details, priority, dueDate);
@@ -126,4 +127,13 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         dialog.close();
         console.log(currentProject);
     }
+    // This one is for clicking outside the modal, to close it.
+    else if (e.target.tagName === 'DIALOG') {
+        // The following line causes the form to reset, but that can
+        // be frustrating for a user, in the case of a misclick.
+        // They would lose all inputted data.
+        // e.target.querySelector('form').reset();
+        e.target.close();
+    }
+        
 });
