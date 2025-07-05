@@ -8,7 +8,7 @@
 <body>
  <div class="main-wrapper">
 <!-- Sidebar -->
-    <aside class="sidebar-wrapper">
+    <aside class="sidebar-wrapper" id="sidebar-wrapper">
         <div class="sidebar-header">
             <button class="sidebar-action" id="site-title" data-action="home">
             Taskaroni
@@ -90,19 +90,19 @@
             <form id="form-nav-create-new-task">
                 <div>
                     <label for="title">Title*:</label>
-                    <input type="text" id="title" name="title" required autofocus>
+                    <input type="text" id="title-nav-task" name="title" required autofocus>
                 </div>
                 <div>
                     <label for="details">Details:</label>
-                    <input type="text" id="details" name="details">
+                    <textarea type="text" id="details-nav-task" name="details"></textarea>
                 </div>
                 <div>
                     <label for="dueDate">Due Date:</label>
-                    <input type="datetime-local" id="dueDate" name="dueDate">
+                    <input type="datetime-local" id="dueDate-nav-task" name="dueDate">
                 </div>
                 <div>
                     <label for="priority">Priority:</label>
-                    <select id="priority" name="priority">
+                    <select id="priority-nav-task" name="priority">
                         <option value="" disabled selected>Select an option</option>
                         <option value="high">High</option>
                         <option value="medium">Medium</option>
@@ -111,6 +111,9 @@
                 </div>
                 <div>
                     <label for="project">Project:</label>
+                    <select id="project-nav-task" name="project">
+                        <!-- Need options here to be generated from project list -->
+                    </select>
                 </div>
                 <button id="submit-button-nav-task" type="submit">Submit</button>
                 <button id="cancel-button-nav-task">Cancel</button>
