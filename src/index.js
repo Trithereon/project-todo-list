@@ -94,21 +94,50 @@ document.getElementById('main-content').addEventListener('click', (e) => {
     }
     else if (e.target.matches('.card-task-item.add-new-task')) {
         const projectContainer = e.target.closest('.card-container');
-        const dialog = document.getElementById('dialog-add-new-task');
+        const dialog = document.getElementById('dialog-card-add-new-task');
         dialog.dataset.projectID = projectContainer.id;
         dialog.showModal();
     }
-    else if (e.target.id === ('cancelButton')) {
-        document.getElementById('dialog-add-new-task').close();
+    else if (e.target.id === 'cancel-button-card-task' 
+                || e.target.id === 'cancel-button-nav-task') {
+        e.target.closest('form').reset();
+        e.target.closest('dialog').close();
     }
-    else if (e.target.id === ('submitButton')) {
+    else if (e.target.id === 'submit-button-card-task') {
         e.preventDefault();
-        const title = document.getElementById('title').value;
-        const details = document.getElementById('details').value;
-        const priority = document.getElementById('priority').value;
-        const dueDate = document.getElementById('dueDate').value;
-        const dialog = document.getElementById('dialog-add-new-task');
-        const form = document.getElementById('form-add-new-task');
+        const form = e.target.closest('form');
+        const title = form.querySelector('input[name="title"]').value;
+        const details = form.querySelector('textarea[name="details"]').value;
+        const priority = form.querySelector('select[name="priority"]').value;
+        const dueDate = form.querySelector('input[name="dueDate"]').value;
+        const dialog = form.closest('dialog');
+        
+        const currentProject = projectManager.getProjectById(dialog.dataset.projectID);
+
+        if (!form.checkValidity()){
+            form.reportValidity();
+            return;
+        } 
+        
+
+        // Once the form is validated, proceed.
+        currentProject.addTask(title, details, priority, dueDate);
+        const currentIndex = currentProject.getTaskList().length - 1;
+        renderedProject
+            .querySelector('.card-task-list')
+            .appendChild(UI.renderTask(currentProject.getTaskList()[currentIndex]));
+        form.reset();
+        dialog.close();
+        console.log(currentProject);
+    }
+    else if (e.target.id === 'submit-button-nav-task') {
+        e.preventDefault();
+        const title = document.getElementById('title-nav-task').value;
+        const details = document.getElementById('details-nav-task').value;
+        const priority = document.getElementById('priority-nav-task').value;
+        const dueDate = document.getElementById('dueDate-nav-task').value;
+        const dialog = document.getElementById('dialog-nav-add-new-task');
+        const form = document.getElementById('form-nav-add-new-task');
         const currentProject = projectManager.getProjectById(dialog.dataset.projectID);
 
         if (!form.checkValidity()){

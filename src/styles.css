@@ -193,7 +193,7 @@ form {
     gap: 1rem;
     border-color: var(--color-primary-accents-orange);
 } 
-form input#details {
+form textarea#details-card-task {
     height: 3rem;
 }
 form button {
@@ -201,9 +201,13 @@ form button {
     background-color: var(--color-primary-sidebar-bg-blue);
     color: var(--color-primary-bg-lightcream);
     padding: 0.5rem;
-    border-radius: 10px;
+    border-radius: 20px;
     border: none;
     width: 8rem;
+}
+form button:active {
+    transform: translateY(1px);
+    box-shadow: 0 -3px 4px -3px var(--color-sup-smalltext-gray);
 }
 form div {
     grid-column: span 2;

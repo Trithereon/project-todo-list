@@ -57,9 +57,37 @@
     </aside>
 <!-- Main Content -->
     <main class="main-content" id="main-content">
-        <dialog id="dialog-add-new-task">
+        <dialog id="dialog-card-add-new-task">
             <p>Add New Task (* required)</p>
-            <form id="form-add-new-task">
+            <form id="form-card-add-new-task">
+                <div>
+                    <label for="title">Title*:</label>
+                    <input type="text" id="title-card-task" name="title" required autofocus>
+                </div>
+                <div>
+                    <label for="details">Details:</label>
+                    <textarea id="details-card-task" name="details"></textarea>
+                </div>
+                <div>
+                    <label for="dueDate">Due Date:</label>
+                    <input type="datetime-local" id="dueDate-card-task" name="dueDate">
+                </div>
+                <div>
+                    <label for="priority">Priority:</label>
+                    <select id="priority-card-task" name="priority">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <button id="submit-button-card-task" type="submit">Submit</button>
+                <button id="cancel-button-card-task">Cancel</button>
+            </form>
+        </dialog>
+        <dialog id="dialog-nav-create-new-task">
+            <p>Add New Task (* required)</p>
+            <form id="form-nav-create-new-task">
                 <div>
                     <label for="title">Title*:</label>
                     <input type="text" id="title" name="title" required autofocus>
@@ -81,8 +109,11 @@
                         <option value="low">Low</option>
                     </select>
                 </div>
-                <button id="submitButton" type="submit">Submit</button>
-                <button id="cancelButton">Cancel</button>
+                <div>
+                    <label for="project">Project:</label>
+                </div>
+                <button id="submit-button-nav-task" type="submit">Submit</button>
+                <button id="cancel-button-nav-task">Cancel</button>
             </form>
         </dialog>
     </main>
