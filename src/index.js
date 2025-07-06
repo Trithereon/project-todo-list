@@ -169,15 +169,17 @@ document.getElementById('main-content').addEventListener('click', (e) => {
             return;
         } 
         
+        const currentProjectCard = document.querySelector(`.card-container[id="${selectedProject}"]`);
+        
+
         // Once the form is validated, proceed.
         projectObject.addTask(title, details, priority, dueDate);
         const currentIndex = projectObject.getTaskList().length - 1;
-        renderedProject
+        currentProjectCard
             .querySelector('.card-task-list')
             .appendChild(UI.renderTask(projectObject.getTaskList()[currentIndex]));
         form.reset();
         dialog.close();
-        console.log(projectObject);
     }
     
 });
