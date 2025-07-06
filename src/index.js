@@ -6,6 +6,7 @@ import 'modern-normalize/modern-normalize.css';
 import detailsRightImg from './img/card/details-right.svg';
 import detailsDownImg from './img/card/details-down.svg';
 import ProjectManager from './project-manager.js';
+import { differenceInCalendarMonths } from 'date-fns';
 
 
 // Class tests
@@ -17,16 +18,30 @@ import ProjectManager from './project-manager.js';
 // );
 
 const defaultProject = new Project('Unassigned tasks');
+const project1 = new Project('Project 1');
+const project2 = new Project('Project 2');
+const project3 = new Project('Project 3 with long project title');
+const project4 = new Project('project 4');
 const projectManager = new ProjectManager();
 defaultProject.addTask(
-    'Get your **** together', 
-    'Go get all your **** from everywhere you left it and bring it all together',
-    'High',
+    'Buy a house', 
+    'Get a job that you feel passionate about and work hard, to make enough money to buy a house in the 400k range, or more, if you have a girlfriend that makes money.',
+    'medium',
     '2019-09-18T19:00:52Z'
 );
 projectManager.addProject(defaultProject);
+projectManager.addProject(project1);
+projectManager.addProject(project2);
+projectManager.addProject(project3);
+projectManager.addProject(project4);
+
+const renderedProject = UI.renderProject(defaultProject);
+UI.renderProject(project1);
+UI.renderProject(project2);
+UI.renderProject(project3);
+UI.renderProject(project4);
+
 console.log(projectManager);
-console.log(projectManager.getProjectById(defaultProject.id));
 
 // console.log('Adding a task to Project...');
 // defaultProject.addTask(testTask);
@@ -52,7 +67,7 @@ console.log(projectManager.getProjectById(defaultProject.id));
 
 // UI tests
 // UI.renderProject(defaultProject);
-const renderedProject = UI.renderProject(defaultProject);
+
 
 renderedProject
   .querySelector('.card-task-list')
@@ -113,6 +128,7 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const dialog = form.closest('dialog');
         
         const currentProject = projectManager.getProjectById(dialog.dataset.projectID);
+        const currentProjectCard = document.querySelector(`.card-container[id="${dialog.dataset.projectID}"]`);
 
         if (!form.checkValidity()){
             form.reportValidity();
@@ -122,12 +138,11 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         // Once the form is validated, proceed.
         currentProject.addTask(title, details, priority, dueDate);
         const currentIndex = currentProject.getTaskList().length - 1;
-        renderedProject
+        currentProjectCard
             .querySelector('.card-task-list')
             .appendChild(UI.renderTask(currentProject.getTaskList()[currentIndex]));
         form.reset();
         dialog.close();
-        console.log(currentProject);
     }
     // This one is for clicking outside the modal, to close it.
     else if (e.target.tagName === 'DIALOG') {
@@ -185,4 +200,14 @@ document.getElementById('sidebar-wrapper').addEventListener('click', (e) => {
         });
         dialog.showModal();
     }
+    else if (e.target.dataset.action === 'search') {
+    // Create and dispatch a keyboard event.
+    console.log('Search button pressed');
+    const event = new KeyboardEvent('keydown', {
+        key: 'f',
+        ctrlKey: true
+    });
+    
+    document.dispatchEvent(event);
+    };
 });

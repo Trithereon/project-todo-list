@@ -19,27 +19,27 @@
         </div>
         <nav class="sidebar-nav">
             <ul class="nav-main-list">
-                <li class="nav-main-item">
+                <!-- <li class="nav-main-item">
                     <button class="sidebar-action" data-action="username">
                         Username
                     </button>
-                </li>
+                </li> -->
                 <li class="nav-main-item">
                     <button class="sidebar-action" data-action="new-task">
                         Create New Task
                     </button>
                 </li>
-                <li class="nav-main-item">
+                <!-- <li class="nav-main-item">
                     <button class="sidebar-action" data-action="search">
                         Search
                     </button>
-                </li>
+                </li> -->
                 <!-- Consider removing Main Board, since it's redundant with Projects -->
-                <li class="nav-main-item">
+                <!-- <li class="nav-main-item">
                     <button class="sidebar-action" data-action="home">
                         Main Board
                     </button>
-                </li>
+                </li> -->
                 <li class="nav-main-item">
                     <button class="sidebar-action" data-action="home">
                         Projects
@@ -61,19 +61,19 @@
             <p>Add New Task (* required)</p>
             <form id="form-card-add-new-task">
                 <div>
-                    <label for="title">Title*:</label>
+                    <label for="title-card-task">Title*:</label>
                     <input type="text" id="title-card-task" name="title" required autofocus>
                 </div>
                 <div>
-                    <label for="details">Details:</label>
+                    <label for="details-card-task">Details:</label>
                     <textarea id="details-card-task" name="details"></textarea>
                 </div>
                 <div>
-                    <label for="dueDate">Due Date:</label>
+                    <label for="dueDate-card-task">Due Date:</label>
                     <input type="datetime-local" id="dueDate-card-task" name="dueDate">
                 </div>
                 <div>
-                    <label for="priority">Priority:</label>
+                    <label for="priority-card-task">Priority:</label>
                     <select id="priority-card-task" name="priority">
                         <option value="" disabled selected>Select an option</option>
                         <option value="high">High</option>
@@ -89,19 +89,19 @@
             <p>Add New Task (* required)</p>
             <form id="form-nav-create-new-task">
                 <div>
-                    <label for="title">Title*:</label>
+                    <label for="title-nav-task">Title*:</label>
                     <input type="text" id="title-nav-task" name="title" required autofocus>
                 </div>
                 <div>
-                    <label for="details">Details:</label>
+                    <label for="details-nav-task">Details:</label>
                     <textarea type="text" id="details-nav-task" name="details"></textarea>
                 </div>
                 <div>
-                    <label for="dueDate">Due Date:</label>
+                    <label for="dueDate-nav-task">Due Date:</label>
                     <input type="datetime-local" id="dueDate-nav-task" name="dueDate">
                 </div>
                 <div>
-                    <label for="priority">Priority:</label>
+                    <label for="priority-nav-task">Priority:</label>
                     <select id="priority-nav-task" name="priority">
                         <option value="" disabled selected>Select an option</option>
                         <option value="high">High</option>
@@ -110,7 +110,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="project">Project:</label>
+                    <label for="project-nav-task">Project:</label>
                     <select id="project-nav-task" name="project">
                         <!-- Need options here to be generated from project list -->
                     </select>
