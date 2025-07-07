@@ -35,11 +35,15 @@ projectManager.addProject(project2);
 projectManager.addProject(project3);
 projectManager.addProject(project4);
 
-const renderedProject = UI.renderProject(defaultProject);
-UI.renderProject(project1);
-UI.renderProject(project2);
-UI.renderProject(project3);
-UI.renderProject(project4);
+projectManager.getProjectList().forEach(project => {
+    UI.renderProject(project);
+    UI.renderSidebarProject(project);
+
+    project.getTaskList().forEach(task => {
+        UI.renderTask(task, project.id);
+    });
+
+});
 
 console.log(projectManager);
 
@@ -69,9 +73,9 @@ console.log(projectManager);
 // UI.renderProject(defaultProject);
 
 
-renderedProject
-  .querySelector('.card-task-list')
-  .appendChild(UI.renderTask(defaultProject.getTaskList()[0]));
+// renderedProject
+//   .querySelector('.card-task-list')
+//   .appendChild(UI.renderTask(defaultProject.getTaskList()[0]));
 
 // Button handling (consider changing the structure of this code)
 document.getElementById('main-content').addEventListener('click', (e) => {
@@ -140,7 +144,11 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const currentIndex = currentProject.getTaskList().length - 1;
         currentProjectCard
             .querySelector('.card-task-list')
-            .appendChild(UI.renderTask(currentProject.getTaskList()[currentIndex]));
+            .appendChild(
+                UI.renderTask(
+                currentProject.getTaskList()[currentIndex],
+                dialog.dataset.projectID
+            ));
         form.reset();
         dialog.close();
     }
@@ -177,7 +185,11 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const currentIndex = projectObject.getTaskList().length - 1;
         currentProjectCard
             .querySelector('.card-task-list')
-            .appendChild(UI.renderTask(projectObject.getTaskList()[currentIndex]));
+            .appendChild(
+                UI.renderTask(
+                    projectObject.getTaskList()[currentIndex],
+                    selectedProject
+                ));
         form.reset();
         dialog.close();
     }
@@ -202,14 +214,11 @@ document.getElementById('sidebar-wrapper').addEventListener('click', (e) => {
         });
         dialog.showModal();
     }
-    else if (e.target.dataset.action === 'search') {
-    // Create and dispatch a keyboard event.
-    console.log('Search button pressed');
-    const event = new KeyboardEvent('keydown', {
-        key: 'f',
-        ctrlKey: true
-    });
-    
-    document.dispatchEvent(event);
+    else if (e.target.dataset.action === 'new-project') {
+        // THIS IS TEMPORARILY PLACED HERE TO TEST THE RENDER FUNCTION.
+        projectManager.getProjectList().forEach(project => {
+            UI.renderSidebarProject(project);
+        });
     };
+
 });

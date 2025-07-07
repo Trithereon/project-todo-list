@@ -53,26 +53,9 @@ ul.nav-main-list, ul.nav-sub-list {
     margin-left: 0;
     padding-left: 0; 
 }
-button.sidebar-action {
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    padding: 0 6px 4px 6px;
-    color: inherit;
-    letter-spacing: 1px;
-}
-button.sidebar-action:hover {
-    translate: 2px;
-    background-color: var(--color-primary-accents-orange);
-    border-radius: 8px;
-}
 #site-title:hover {
     translate: 0;
     background-color: inherit;
-}
-.nav-sub-item {
-    padding-left:18px;
 }
 .sidebar-nav {
     display: flex;
@@ -89,6 +72,26 @@ button.sidebar-action:hover {
     flex-direction: column;
     margin-top: 5px;
     gap: 5px;
+}
+.nav-sub-item {
+    padding-left: 18px;
+}
+.nav-sub-item#sidebar-create-new-project {
+    padding-left: 9px;
+}
+button.sidebar-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 0 6px 4px 6px;
+    color: inherit;
+    letter-spacing: 1px;
+}
+button.sidebar-action:hover {
+    translate: 2px;
+    background-color: var(--color-primary-accents-orange);
+    border-radius: 8px;
 }
 
 /* Card styles */

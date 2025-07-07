@@ -3,6 +3,7 @@
 import detailsRightImg from './img/card/details-right.svg';
 import editImg from './img/card/edit.svg';
 import deleteImg from './img/card/delete.svg';
+import ProjectManager from './project-manager';
 
 const UI = (() => {
     // Private function, so underscore prefix.
@@ -14,8 +15,7 @@ const UI = (() => {
     }
 
     const mainContent = document.getElementById('main-content');
-
-
+    
     // Public functions to be exported.
     const renderProject = (project) => {
         const container = _createElement('div', 'card-container');
@@ -24,6 +24,7 @@ const UI = (() => {
         const addNewTask = _createElement('li', 'card-task-item add-new-task', '+Add new task');
 
         container.id = project.id;
+
         mainContent.appendChild(container);
         container.append(title, taskList);
         taskList.appendChild(addNewTask);
@@ -31,9 +32,23 @@ const UI = (() => {
         return container;
     }
 
+    const renderSidebarProject = (project) => {
+        const listContainer = document.querySelector('ul.nav-sub-list');
+        const listItem = _createElement('li', 'nav-sub-item');
+        const button = _createElement('button', 'sidebar-action', `${project.title}`);
+        
+        button.dataset.projectID = project.id;
+
+        listContainer.appendChild(listItem);
+        listItem.appendChild(button);
+
+        return listItem;
+        
+    }
+
     // Might need to modify this function to receive full task list
     // and render all tasks recursively with an array.forEach method.
-    const renderTask = (task) => {
+    const renderTask = (task, projectID) => {
         const container = _createElement('li', 'card-task-item');
         const input = _createElement('input');
         const details = _createElement('details');
@@ -71,11 +86,16 @@ const UI = (() => {
         expandedDetailsContainer.append(taskDescription, dueDate, priority);
         cardActionsContainer.append(imgDetailsRight, imgEdit, imgDelete); 
 
+        const projectCardContainer = document.getElementById(projectID);
+        const taskList = projectCardContainer.querySelector('ul.card-task-list');
+        
+        taskList.appendChild(container);
+
         return container;
 
     }
 
-    return {renderProject, renderTask};
+    return {renderProject, renderTask, renderSidebarProject};
 
 })();
 
