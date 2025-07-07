@@ -102,7 +102,6 @@ button.sidebar-action:hover {
 }
 .card-container {
     background-color: var(--color-primary-white);
-    /* background-color: var(--color-sup-bg-cream); */
     height: max-content;
     min-width: 200px;
     max-width: 360px;
@@ -110,11 +109,11 @@ button.sidebar-action:hover {
     padding: 0 15px;
     border-left: 2px solid var(--color-primary-accents-orange);
     box-shadow: 1px 2px 3px rgba(197, 127, 8, 0.2);
-    cursor: grab;
+    /* cursor: grab; */
 }
-.card-container:active {
+/* .card-container:active {
     cursor: grabbing;
-}
+} */
 h3.card-project-title {
     margin-top: 12px;
     margin-bottom: 0;
@@ -145,13 +144,29 @@ Some HTML changes could break this. */
     accent-color: green;
 }
 details .expanded-details-container {
-    display:grid;
+    display: grid;
     font-size: 0.6rem;
     /* padding-left: 0.5rem; */
 }
 .card-task-item.add-new-task {
-   text-wrap: nowrap;
-   cursor: pointer;
+    text-wrap: nowrap;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: rgba(68, 67, 66, 0.1);
+    width:8.5rem;
+    padding-left: 0.4rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    transition: box-shadow 250ms ease;
+}
+.card-task-item.add-new-task:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    background-color: rgba(68, 67, 66, 0.2);
+}
+.card-task-item.add-new-task:active {
+    box-shadow: none;
+    background-color: rgba(68, 67, 66, 0.3);
+    transform: translateY(1px);
 }
 .card-actions-container {
     display: flex;
@@ -177,7 +192,7 @@ details > summary:first-of-type {
     list-style-type: none;
 }
 details summary::-webkit-details-marker {
-  display: none;
+    display: none;
 }
 
 /* Form styles */
