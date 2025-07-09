@@ -93,8 +93,21 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         // Consider moving this DOM manipulation to the UI module.
     }
     else if (e.target.matches('.card-actions-edit')) {
-        console.log('you clicked on the EDIT button!');
-        // Maybe the task creation modal opens with default values equal to the current values.
+        const projectContainer = e.target.closest('.card-container');
+        const dialog = document.getElementById('dialog-card-add-new-task');
+        dialog.dataset.projectID = projectContainer.id;
+        
+        const project = projectManager.getProjectById(projectContainer.id);
+        const taskId = e.target.closest('.card-task-item').id;
+        const task = project.getTaskById(taskId);
+        
+        const form = dialog.querySelector('form');
+        form.elements['title'].value = task.title;
+        form.elements['details'].value = task.details;
+        form.elements['priority'].value = task.priority;
+        form.elements['dueDate'].value = task.dueDate.slice(0, 16); // Bug fix: slice away the seconds and timezone, otherwise this doesn't work.
+
+        dialog.showModal();
     }
     else if (e.target.matches('.card-actions-delete')) {
         // Consider adding a confirmation modal to make user confirm deletion.
@@ -117,6 +130,7 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         dialog.dataset.projectID = projectContainer.id;
         dialog.showModal();
     }
+
     else if (e.target.id === 'cancel-button-card-task' 
                 || e.target.id === 'cancel-button-nav-task') {
         e.target.closest('form').reset();
@@ -125,10 +139,10 @@ document.getElementById('main-content').addEventListener('click', (e) => {
     else if (e.target.id === 'submit-button-card-task') {
         e.preventDefault();
         const form = e.target.closest('form');
-        const title = form.querySelector('input[name="title"]').value;
-        const details = form.querySelector('textarea[name="details"]').value;
-        const priority = form.querySelector('select[name="priority"]').value;
-        const dueDate = form.querySelector('input[name="dueDate"]').value;
+        const title = form.elements['title'].value;
+        const details = form.elements['details'].value;
+        const priority = form.elements['priority'].value;
+        const dueDate = form.elements['dueDate'].value;
         const dialog = form.closest('dialog');
         
         const currentProject = projectManager.getProjectById(dialog.dataset.projectID);
@@ -164,10 +178,10 @@ document.getElementById('main-content').addEventListener('click', (e) => {
     else if (e.target.id === 'submit-button-nav-task') {
         e.preventDefault();
         const form = e.target.closest('form');
-        const title = form.querySelector('input[name="title"]').value;
-        const details = form.querySelector('textarea[name="details"]').value;
-        const priority = form.querySelector('select[name="priority"]').value;
-        const dueDate = form.querySelector('input[name="dueDate"]').value;
+        const title = form.elements['title'].value;
+        const details = form.elements['details'].value;
+        const priority = form.elements['priority'].value;
+        const dueDate = form.elements['dueDate'].value;
         const selectedProject = form.querySelector('select[name="project"]').value;
         const dialog = form.closest('dialog');
         const projectObject = projectManager.getProjectById(selectedProject);

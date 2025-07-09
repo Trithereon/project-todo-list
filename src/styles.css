@@ -159,7 +159,7 @@ details .expanded-details-container {
     width:8.5rem;
     padding-left: 0.4rem;
     padding-top: 0.1rem;
-    padding-bottom: 0.1rem;
+    padding-bottom: 0.15rem;
     transition: box-shadow 250ms ease;
 }
 .card-task-item.add-new-task:hover {

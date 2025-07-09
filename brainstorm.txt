@@ -72,9 +72,32 @@ Draft of website structure
         1. Application logic
         2. DOM Manipulation
         3. Storage
+        4. Event handling
 
-    Step 3
-    TBD
+    Remaining tasks to complete:
+        -Edit mode
+        Maybe make the card modal reappear but have it prefilled with the current values of the object.
+        ALMOST THERE! I just need to create a new dialog for EDIT mode, with different Submit button functionality.
+
+        -Create new project button
+        Make a sidebar modal with project details (minimal)
+
+        -Delete projects option
+        Add card actions next to projects. Maybe just edit and delete, since there aren't details.
+
+        -Render sidebar project list
+        Requirements:
+        + Be clickable
+        + When clicked, delete entire main content, then render the selected project only.
+        + Delete when the project card is deleted.
+
+        -Implement localStorage
+
+        -Change date format output
+        To PPpp I think, using date-fns.
+
+
+
 
 
 
