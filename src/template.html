@@ -30,7 +30,7 @@
                     </button>
                 </li> -->
                 <li class="nav-main-item">
-                    <button class="sidebar-action" data-action="new-task">
+                    <button class="sidebar-action" data-action="navNewTask">
                         Create New Task
                     </button>
                 </li>
@@ -51,7 +51,7 @@
                     </button>
                     <ul class="nav-sub-list">
                         <li class="nav-sub-item" id="sidebar-create-new-project">
-                            <button class="sidebar-action" data-action="new-project">
+                            <button class="sidebar-action" data-action="navNewProject">
                                 Create New Project
                             </button>
                         </li>
@@ -86,10 +86,45 @@
                         <option value="low">Low</option>
                     </select>
                 </div>
-                <button id="submit-button-card-task" type="submit">Submit</button>
-                <button id="cancel-button-card-task">Cancel</button>
+                <button id="submit-button-card-task" type="submit" data-action="submitCardTask">Submit</button>
+                <button id="cancel-button-card-task" data-action="cancel">Cancel</button>
             </form>
         </dialog>
+        <dialog id="dialog-card-edit-task">
+            <p>Edit Task (* required)</p>
+            <form id="form-card-edit-task">
+                <div>
+                    <label for="title-card-edit-task">Title*:</label>
+                    <input type="text" id="title-card-edit-task" name="title" required autofocus>
+                </div>
+                <div>
+                    <label for="details-card-edit-task">Details:</label>
+                    <textarea type="text" id="details-card-edit-task" name="details"></textarea>
+                </div>
+                <div>
+                    <label for="dueDate-card-edit-task">Due Date:</label>
+                    <input type="datetime-local" id="dueDate-card-edit-task" name="dueDate">
+                </div>
+                <div>
+                    <label for="priority-card-edit-task">Priority:</label>
+                    <select id="priority-card-edit-task" name="priority">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="project-card-edit-task">Project:</label>
+                    <select id="project-card-edit-task" name="project">
+                        <!-- Need options here to be generated from project list -->
+                    </select>
+                </div>
+                <button id="submit-button-card-edit-task" type="submit" data-action="submitEditTask">Submit</button>
+                <button id="cancel-button-card-edit-task" data-action="cancel">Cancel</button>
+            </form>
+        </dialog>
+
         <dialog id="dialog-nav-create-new-task">
             <p>Add New Task (* required)</p>
             <form id="form-nav-create-new-task">
@@ -120,8 +155,8 @@
                         <!-- Need options here to be generated from project list -->
                     </select>
                 </div>
-                <button id="submit-button-nav-task" type="submit">Submit</button>
-                <button id="cancel-button-nav-task">Cancel</button>
+                <button id="submit-button-nav-task" type="submit" data-action="submitNavTask">Submit</button>
+                <button id="cancel-button-nav-task" data-action="cancel">Cancel</button>
             </form>
         </dialog>
     </main>

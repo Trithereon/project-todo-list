@@ -26,8 +26,12 @@ export default class Project {
     updateTask(id, newDetails) {
         const taskToBeUpdated = this.getTaskById(id);
         // Note: newDetails should be received in a format similar to {title: 'Modified title'}.
-        // console.log(taskToBeUpdated);
-        // console.log('the above output is "taskToBeUpdated" inside updateTask in Project class');
+        console.log(id);
+        console.log('the above is value of id in call to updateTask');
+        console.log(this);
+        console.log('the above is a call to "this"');
+        console.log(taskToBeUpdated);
+        console.log('the above output is "taskToBeUpdated" inside updateTask in Project class');
         taskToBeUpdated.updateDetails(newDetails);
     }
 

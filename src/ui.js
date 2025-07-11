@@ -24,6 +24,7 @@ const UI = (() => {
         const addNewTask = _createElement('li', 'card-task-item add-new-task', '+Add new task');
 
         container.id = project.id;
+        addNewTask.dataset.action = 'cardNewTask';
 
         mainContent.appendChild(container);
         container.append(title, taskList);
@@ -65,20 +66,24 @@ const UI = (() => {
         // Assign attributes
         container.id = task.id;
         input.type = 'checkbox';
-        input.name = 'taskComplete'
+        input.name = 'taskComplete';
+        input.dataset.action = 'taskComplete';
         dueDate.datetime = task.dueDate; // Need to convert the dueDate value format before assigning here.
         imgDetailsRight.width = '18';
         imgDetailsRight.height = '18';
         imgDetailsRight.src = detailsRightImg;
         imgDetailsRight.alt = 'Details icon';
+        imgDetailsRight.dataset.action = 'details';
         imgEdit.width = '18';
         imgEdit.height = '18';
         imgEdit.src = editImg;
         imgEdit.alt = 'Edit icon';
+        imgEdit.dataset.action = 'edit';
         imgDelete.width = '18';
         imgDelete.height = '18';
         imgDelete.src = deleteImg;
         imgDelete.alt = 'Delete icon';
+        imgDelete.dataset.action = 'delete';
 
         // Assemble elements
         container.append(input, details, cardActionsContainer);

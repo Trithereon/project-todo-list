@@ -7,6 +7,7 @@ import detailsRightImg from './img/card/details-right.svg';
 import detailsDownImg from './img/card/details-down.svg';
 import ProjectManager from './project-manager.js';
 import { differenceInCalendarMonths } from 'date-fns';
+import { differenceInCalendarDaysWithOptions } from 'date-fns/fp';
 
 
 // Class tests
@@ -22,20 +23,20 @@ const project1 = new Project('Project 1');
 const project2 = new Project('Project 2');
 const project3 = new Project('Project 3 with long project title');
 const project4 = new Project('project 4');
-const projectManager = new ProjectManager();
 defaultProject.addTask(
     'Buy a house', 
     'Get a job that you feel passionate about and work hard, to make enough money to buy a house in the 400k range, or more, if you have a girlfriend that makes money.',
     'medium',
-    '2019-09-18T19:00:52Z'
+    '2019-09-18T19:00:52Z',
+    defaultProject.id
 );
-projectManager.addProject(defaultProject);
-projectManager.addProject(project1);
-projectManager.addProject(project2);
-projectManager.addProject(project3);
-projectManager.addProject(project4);
+ProjectManager.addProject(defaultProject);
+ProjectManager.addProject(project1);
+ProjectManager.addProject(project2);
+ProjectManager.addProject(project3);
+ProjectManager.addProject(project4);
 
-projectManager.getProjectList().forEach(project => {
+ProjectManager.getProjectList().forEach(project => {
     UI.renderProject(project);
     UI.renderSidebarProject(project);
 
@@ -45,7 +46,7 @@ projectManager.getProjectList().forEach(project => {
 
 });
 
-console.log(projectManager);
+console.log(ProjectManager);
 
 // console.log('Adding a task to Project...');
 // defaultProject.addTask(testTask);
@@ -94,18 +95,38 @@ document.getElementById('main-content').addEventListener('click', (e) => {
     }
     else if (e.target.matches('.card-actions-edit')) {
         const projectContainer = e.target.closest('.card-container');
-        const dialog = document.getElementById('dialog-card-add-new-task');
-        dialog.dataset.projectID = projectContainer.id;
+        const taskContainer = e.target.closest('.card-task-item');
+        const dialog = document.getElementById('dialog-card-edit-task');
+        dialog.dataset.projectId = projectContainer.id;
+        dialog.dataset.taskId = taskContainer.id;
         
-        const project = projectManager.getProjectById(projectContainer.id);
-        const taskId = e.target.closest('.card-task-item').id;
-        const task = project.getTaskById(taskId);
+        const project = ProjectManager.getProjectById(projectContainer.id);
+        const task = project.getTaskById(taskContainer.id);
         
         const form = dialog.querySelector('form');
         form.elements['title'].value = task.title;
         form.elements['details'].value = task.details;
         form.elements['priority'].value = task.priority;
         form.elements['dueDate'].value = task.dueDate.slice(0, 16); // Bug fix: slice away the seconds and timezone, otherwise this doesn't work.
+        form.elements['project'].value = task.projectId;
+
+        const projectDropdown = dialog.querySelector('select[name="project"]');
+        
+        // Reset any old options before populating them again. 
+        projectDropdown.textContent = ''; 
+
+        ProjectManager.getProjectList().forEach(project => {
+            // Store projectId as option.value, but display project title as textContent
+            const option = document.createElement('option');
+            option.value = project.id;
+            option.textContent = project.title;
+
+            projectDropdown.appendChild(option);
+        });
+
+        // After generating the dropdown options, display the currently selected task project.
+        // projectDropdown.value = task.projectId;
+        // projectDropdown.textContent = project.title;
 
         dialog.showModal();
     }
@@ -113,7 +134,7 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         // Consider adding a confirmation modal to make user confirm deletion.
         const taskContainer = e.target.closest('.card-task-item');
         const projectContainer = taskContainer.closest('.card-container');
-        const currentProject = projectManager.getProjectById(projectContainer.id);
+        const currentProject = ProjectManager.getProjectById(projectContainer.id);
 
         currentProject.deleteTask(taskContainer.id); // Delete from array.
         taskContainer.remove(); // Delete from DOM.
@@ -121,18 +142,19 @@ document.getElementById('main-content').addEventListener('click', (e) => {
     else if (e.target.name === 'taskComplete') {
         const taskContainer = e.target.closest('.card-task-item');
         const projectContainer = taskContainer.closest('.card-container');
-        const currentProject = projectManager.getProjectById(projectContainer.id);
+        const currentProject = ProjectManager.getProjectById(projectContainer.id);
         currentProject.getTaskById(taskContainer.id).toggleComplete();
     }
     else if (e.target.matches('.card-task-item.add-new-task')) {
         const projectContainer = e.target.closest('.card-container');
         const dialog = document.getElementById('dialog-card-add-new-task');
-        dialog.dataset.projectID = projectContainer.id;
+        dialog.dataset.projectId = projectContainer.id;
         dialog.showModal();
     }
 
     else if (e.target.id === 'cancel-button-card-task' 
-                || e.target.id === 'cancel-button-nav-task') {
+                || e.target.id === 'cancel-button-nav-task' 
+                || e.target.id === 'cancel-button-card-edit-task') {
         e.target.closest('form').reset();
         e.target.closest('dialog').close();
     }
@@ -145,8 +167,8 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const dueDate = form.elements['dueDate'].value;
         const dialog = form.closest('dialog');
         
-        const currentProject = projectManager.getProjectById(dialog.dataset.projectID);
-        const currentProjectCard = document.querySelector(`.card-container[id="${dialog.dataset.projectID}"]`);
+        const currentProject = ProjectManager.getProjectById(dialog.dataset.projectId);
+        const currentProjectCard = document.querySelector(`.card-container[id="${dialog.dataset.projectId}"]`);
 
         if (!form.checkValidity()){
             form.reportValidity();
@@ -154,26 +176,27 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         } 
         
         // Once the form is validated, proceed.
-        currentProject.addTask(title, details, priority, dueDate);
+        currentProject.addTask(title, details, priority, dueDate, currentProject.id);
         const currentIndex = currentProject.getTaskList().length - 1;
         currentProjectCard
             .querySelector('.card-task-list')
             .appendChild(
                 UI.renderTask(
                 currentProject.getTaskList()[currentIndex],
-                dialog.dataset.projectID
+                dialog.dataset.projectId
             ));
         form.reset();
         dialog.close();
     }
     // This one is for clicking outside the modal, to close it.
-    else if (e.target.tagName === 'DIALOG') {
-        // The following line causes the form to reset, but that can
-        // be frustrating for a user, in the case of a misclick.
-        // They would lose all inputted data.
-        // e.target.querySelector('form').reset();
-        e.target.close();
-    }
+    // Currently deactivated since it was causing issues when attempting to drag the details textarea field wider.
+    // else if (e.target.tagName === 'DIALOG') {
+    //     // The following line causes the form to reset, but that can
+    //     // be frustrating for a user, in the case of a misclick.
+    //     // They would lose all inputted data.
+    //     // e.target.querySelector('form').reset();
+    //     e.target.close();
+    // }
     // The create new task button from the nav sidebar
     else if (e.target.id === 'submit-button-nav-task') {
         e.preventDefault();
@@ -182,9 +205,9 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         const details = form.elements['details'].value;
         const priority = form.elements['priority'].value;
         const dueDate = form.elements['dueDate'].value;
-        const selectedProject = form.querySelector('select[name="project"]').value;
+        const selectedProject = form.elements['project'].value;
         const dialog = form.closest('dialog');
-        const projectObject = projectManager.getProjectById(selectedProject);
+        const projectObject = ProjectManager.getProjectById(selectedProject);
 
         if (!form.checkValidity()){
             form.reportValidity();
@@ -193,9 +216,42 @@ document.getElementById('main-content').addEventListener('click', (e) => {
         
         const currentProjectCard = document.querySelector(`.card-container[id="${selectedProject}"]`);
         
+        // Once the form is validated, proceed.
+        projectObject.addTask(title, details, priority, dueDate, selectedProject);
+        const currentIndex = projectObject.getTaskList().length - 1;
+        currentProjectCard
+            .querySelector('.card-task-list')
+            .appendChild(
+                UI.renderTask(
+                    projectObject.getTaskList()[currentIndex],
+                    selectedProject
+                ));
+        form.reset();
+        dialog.close();
+    }
+    // Edit task.
+    else if (e.target.id === 'submit-button-card-edit-task') {
+        e.preventDefault();
+        const form = e.target.closest('form');
+        const title = form.elements['title'].value;
+        const details = form.elements['details'].value;
+        const priority = form.elements['priority'].value;
+        const dueDate = form.elements['dueDate'].value;
+        const selectedProject = form.elements['project'].value;
+        const dialog = form.closest('dialog');
+        const projectObject = ProjectManager.getProjectById(selectedProject);
+
+        if (!form.checkValidity()){
+            form.reportValidity();
+            return;
+        } 
+        
+        const currentProjectCard = document.querySelector(`.card-container[id="${selectedProject}"]`);
+        const currentTaskId = dialog.dataset.taskId;
 
         // Once the form is validated, proceed.
-        projectObject.addTask(title, details, priority, dueDate);
+        projectObject.updateTask(currentTaskId, {title: title, details: details, priority: priority, dueDate: dueDate, projectId: selectedProject});
+        console.log(projectObject.getTaskById(currentTaskId));
         const currentIndex = projectObject.getTaskList().length - 1;
         currentProjectCard
             .querySelector('.card-task-list')
@@ -218,8 +274,8 @@ document.getElementById('sidebar-wrapper').addEventListener('click', (e) => {
         // Reset any old options before populating them again. 
         projectDropdown.textContent = ''; 
 
-        projectManager.getProjectList().forEach(project => {
-            // Store projectID as option.value, but display project title as textContent
+        ProjectManager.getProjectList().forEach(project => {
+            // Store projectId as option.value, but display project title as textContent
             const option = document.createElement('option');
             option.value = project.id;
             option.textContent = project.title;
@@ -230,7 +286,7 @@ document.getElementById('sidebar-wrapper').addEventListener('click', (e) => {
     }
     else if (e.target.dataset.action === 'new-project') {
         // THIS IS TEMPORARILY PLACED HERE TO TEST THE RENDER FUNCTION.
-        projectManager.getProjectList().forEach(project => {
+        ProjectManager.getProjectList().forEach(project => {
             UI.renderSidebarProject(project);
         });
     };
