@@ -3,6 +3,7 @@ import detailsRightImg from './img/card/details-right.svg';
 import detailsDownImg from './img/card/details-down.svg';
 import ProjectManager from './project-manager';
 import UI from './ui';
+import Project from './project';
 
 export default class EventHandler {
     static actionHandlers = {
@@ -17,6 +18,7 @@ export default class EventHandler {
         submitCardTask: EventHandler.handleSubmitCardTask,
         submitNavTask: EventHandler.handleSubmitNavTask,
         submitEditTask: EventHandler.handleSubmitEditTask,
+        submitNewProject: EventHandler.handleSubmitNewProject
     };
     
     static init() {
@@ -116,10 +118,10 @@ export default class EventHandler {
         dialog.showModal();
     }
     static handleNavNewProject(e) {
-        // THIS IS TEMPORARILY PLACED HERE TO TEST THE RENDER FUNCTION.
-        ProjectManager.getProjectList().forEach(project => {
-            UI.renderSidebarProject(project);
-        });
+        // Need renderProject (returns container card)
+        // Need renderSidebarProject (returns listItem for sidebar)  
+        const dialog = document.getElementById('dialog-create-new-project');
+        dialog.showModal();     
     }
     static handleCancel(e) {
         e.target.closest('form').reset();
@@ -242,12 +244,22 @@ export default class EventHandler {
 
         form.reset();
         dialog.close();
-
     }
 
+    static handleSubmitNewProject(e) {
+        e.preventDefault();
+        const form = e.target.closest('form');
+        const dialog = form.closest('dialog');
+        const title = form.elements['title'].value;
+        const project = new Project(title);
 
+        ProjectManager.addProject(project);
+        UI.renderProject(project);
+        UI.renderSidebarProject(project)
 
-
+        form.reset();
+        dialog.close();
+    }
 
 
 

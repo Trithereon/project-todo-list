@@ -159,6 +159,17 @@
                 <button id="cancel-button-nav-task" data-action="cancel">Cancel</button>
             </form>
         </dialog>
+        <dialog id="dialog-create-new-project">
+            <p>Add New Task (* required)</p>
+            <form id="form-create-new-project">
+                <div>
+                    <label for="project-title">Title*:</label>
+                    <input type="text" id="project-title" name="title" required autofocus>
+                </div>
+                <button id="submit-create-new-project" type="submit" data-action="submitNewProject">Submit</button>
+                <button id="cancel-create-new-project" data-action="cancel">Cancel</button>
+            </form>
+        </dialog>
     </main>
 </div>
 </body>
