@@ -31,7 +31,6 @@ export default class EventHandler {
     }
     static handleDetails(e) {
         // Find parent, details will be next to it, toggle open state.
-        console.log('clicking details successfully called the handleDetails function in events.js');
         const parent = e.target.closest('.card-actions-container');
         const details = parent.previousElementSibling;
         details.open = !details.open;
@@ -56,15 +55,15 @@ export default class EventHandler {
         form.elements['details'].value = task.details;
         form.elements['priority'].value = task.priority;
         form.elements['dueDate'].value = task.dueDate.slice(0, 16); // Bug fix: slice away the seconds and timezone, otherwise this doesn't work.
-        form.elements['project'].value = task.projectId;
+        form.elements['project'].value = project.id;
 
-        const projectDropdown = dialog.querySelector('select[name="project"]');
+        const projectDropdown = form.elements['project'];
         
         // Reset any old options before populating them again. 
         projectDropdown.textContent = ''; 
 
         ProjectManager.getProjectList().forEach(project => {
-            // Store projectId as option.value, but display project title as textContent
+            // Store project.id as option.value, but display project title as textContent
             const option = document.createElement('option');
             option.value = project.id;
             option.textContent = project.title;
@@ -73,8 +72,7 @@ export default class EventHandler {
         });
 
         // After generating the dropdown options, display the currently selected task project.
-        // projectDropdown.value = task.projectId;
-        // projectDropdown.textContent = project.title;
+        projectDropdown.value = project.id;
 
         dialog.showModal();
     }
@@ -195,29 +193,53 @@ export default class EventHandler {
         const details = form.elements['details'].value;
         const priority = form.elements['priority'].value;
         const dueDate = form.elements['dueDate'].value;
-        const selectedProject = form.elements['project'].value;
+        const newlySelectedProjectId = form.elements['project'].value;
         const dialog = form.closest('dialog');
-        const projectObject = ProjectManager.getProjectById(selectedProject);
+        const newlySelectedProject = ProjectManager.getProjectById(newlySelectedProjectId);
+        const currentTaskId = dialog.dataset.taskId;
+        const currentProjectId = dialog.dataset.projectId;
+        const currentProject = ProjectManager.getProjectById(currentProjectId);
+        const currentTask = currentProject.getTaskById(currentTaskId);
 
         if (!form.checkValidity()){
             form.reportValidity();
             return;
         } 
         
-        const currentProjectCard = document.querySelector(`.card-container[id="${selectedProject}"]`);
-        const currentTaskId = dialog.dataset.taskId;
+        const newlySelectedProjectCard = document.querySelector(`.card-container[id="${newlySelectedProjectId}"]`);
+        const currentTaskContainer = document.querySelector(`.card-task-item[id="${currentTaskId}"]`);
 
         // Once the form is validated, proceed.
-        projectObject.updateTask(currentTaskId, {title: title, details: details, priority: priority, dueDate: dueDate, projectId: selectedProject});
-        console.log(projectObject.getTaskById(currentTaskId));
-        const currentIndex = projectObject.getTaskList().length - 1;
-        currentProjectCard
+        // Pseudocode:
+        // if project is modified, delete task and create new task in selected project.
+        // else updateTask with new information.
+        // In both cases, the UI needs to be updated, i.e. the old removed and the new appended.
+        
+        if (newlySelectedProjectId !== currentProjectId) {
+            // Add task to new project.
+            newlySelectedProject.addTask(title, details, priority, dueDate);
+            // Delete task from old project.
+            currentProject.deleteTask(currentTaskId);
+        }
+        else {
+            newlySelectedProject.updateTask(currentTaskId, {title: title, details: details, priority: priority, dueDate: dueDate});
+        }
+
+        const currentIndex = newlySelectedProject.getTaskList().length - 1;
+        
+        // Remove task with old information from DOM.
+        currentTaskContainer.remove();
+
+        // Append task with new information to DOM.
+        newlySelectedProjectCard
             .querySelector('.card-task-list')
             .appendChild(
                 UI.renderTask(
-                    projectObject.getTaskList()[currentIndex],
-                    selectedProject
+                    newlySelectedProject.getTaskList()[currentIndex],
+                    newlySelectedProjectId
                 ));
+        
+
         form.reset();
         dialog.close();
 

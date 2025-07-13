@@ -38,7 +38,7 @@ const UI = (() => {
         const listItem = _createElement('li', 'nav-sub-item');
         const button = _createElement('button', 'sidebar-action', `${project.title}`);
         
-        button.dataset.projectID = project.id;
+        button.dataset.projectId = project.id;
 
         listContainer.appendChild(listItem);
         listItem.appendChild(button);
@@ -49,7 +49,7 @@ const UI = (() => {
 
     // Might need to modify this function to receive full task list
     // and render all tasks recursively with an array.forEach method.
-    const renderTask = (task, projectID) => {
+    const renderTask = (task, projectId) => {
         const container = _createElement('li', 'card-task-item');
         const input = _createElement('input');
         const details = _createElement('details');
@@ -91,7 +91,7 @@ const UI = (() => {
         expandedDetailsContainer.append(taskDescription, dueDate, priority);
         cardActionsContainer.append(imgDetailsRight, imgEdit, imgDelete); 
 
-        const projectCardContainer = document.getElementById(projectID);
+        const projectCardContainer = document.getElementById(projectId);
         const taskList = projectCardContainer.querySelector('ul.card-task-list');
         
         taskList.appendChild(container);
