@@ -18,7 +18,9 @@ export default class EventHandler {
         submitCardTask: EventHandler.handleSubmitCardTask,
         submitNavTask: EventHandler.handleSubmitNavTask,
         submitEditTask: EventHandler.handleSubmitEditTask,
-        submitNewProject: EventHandler.handleSubmitNewProject
+        submitNewProject: EventHandler.handleSubmitNewProject,
+        editProject: EventHandler.handleEditProject,
+        deleteProject: EventHandler.handleDeleteProject
     };
     
     static init() {
@@ -261,6 +263,15 @@ export default class EventHandler {
         dialog.close();
     }
 
+    static handleEditProject(e) {
+        console.log('YOU clicked the project EDIT button');
+    }
+    static handleDeleteProject(e) {
+        const projectCard = e.target.closest('.card-container');        
+        const id = projectCard.id;
 
+        ProjectManager.deleteProject(id);
+        projectCard.remove();
+    }
 
 }

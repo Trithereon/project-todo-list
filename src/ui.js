@@ -19,15 +19,32 @@ const UI = (() => {
     // Public functions to be exported.
     const renderProject = (project) => {
         const container = _createElement('div', 'card-container');
+        const titleContainer = _createElement('div', 'card-project-title-container');
         const title = _createElement('h3', 'card-project-title', project.title);
         const taskList = _createElement('ul', 'card-task-list');
         const addNewTask = _createElement('li', 'card-task-item add-new-task', '+Add new task');
+        const cardActionsContainer = _createElement('div', 'card-actions-container');
+        const imgEdit = _createElement('img', 'card-actions-edit');
+        const imgDelete = _createElement('img', 'card-actions-delete');
 
+        // Assign attributes.
         container.id = project.id;
-        addNewTask.dataset.action = 'cardNewTask';
+        addNewTask.dataset.action = 'cardNewTask';        
+        imgEdit.width = '18';
+        imgEdit.height = '18';
+        imgEdit.src = editImg;
+        imgEdit.alt = 'Edit icon';
+        imgEdit.dataset.action = 'editProject';
+        imgDelete.width = '18';
+        imgDelete.height = '18';
+        imgDelete.src = deleteImg;
+        imgDelete.alt = 'Delete icon';
+        imgDelete.dataset.action = 'deleteProject';
 
         mainContent.appendChild(container);
-        container.append(title, taskList);
+        container.append(titleContainer, taskList);
+        titleContainer.append(title, cardActionsContainer);
+        cardActionsContainer.append(imgEdit, imgDelete);
         taskList.appendChild(addNewTask);
 
         return container;
@@ -43,8 +60,7 @@ const UI = (() => {
         listContainer.appendChild(listItem);
         listItem.appendChild(button);
 
-        return listItem;
-        
+        return listItem;        
     }
 
     // Might need to modify this function to receive full task list
