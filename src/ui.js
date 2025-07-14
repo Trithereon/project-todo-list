@@ -43,7 +43,11 @@ const UI = (() => {
 
         mainContent.appendChild(container);
         container.append(titleContainer, taskList);
-        titleContainer.append(title, cardActionsContainer);
+        titleContainer.appendChild(title);
+        // Prevent deletion or modification of Default Project.
+        if (project.title !== 'Unassigned tasks'){
+            titleContainer.appendChild(cardActionsContainer);
+        }
         cardActionsContainer.append(imgEdit, imgDelete);
         taskList.appendChild(addNewTask);
 
@@ -56,6 +60,7 @@ const UI = (() => {
         const button = _createElement('button', 'sidebar-action', `${project.title}`);
         
         button.dataset.projectId = project.id;
+        button.dataset.action = 'focusProject';
 
         listContainer.appendChild(listItem);
         listItem.appendChild(button);
@@ -124,7 +129,37 @@ const UI = (() => {
         return;
     }
 
-    return {renderProject, renderTask, renderSidebarProject, updateProject};
+    const focusProject = (id) => {
+        // Remove all project cards.
+        document.querySelectorAll('.card-container').forEach(element => {
+            element.remove();
+        });
+
+        // Render selected project and its tasks.
+        const project = ProjectManager.getProjectById(id);
+        renderProject(project);
+        project.getTaskList().forEach(task => {
+            renderTask(task, project.id);
+        });
+
+    }
+
+    const renderHome = () => {
+        // Remove all project cards.
+        document.querySelectorAll('.card-container').forEach(element => {
+            element.remove();
+        });
+        // Render all project cards.
+        ProjectManager.getProjectList().forEach(project => {
+            renderProject(project);
+            // Render all tasks for each project.
+            project.getTaskList().forEach(task => {
+                renderTask(task, project.id);
+            });
+        });
+    }
+
+    return {renderProject, renderTask, renderSidebarProject, updateProject, focusProject, renderHome};
 
 })();
 

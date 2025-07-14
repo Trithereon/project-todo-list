@@ -21,7 +21,9 @@ export default class EventHandler {
         submitNewProject: EventHandler.handleSubmitNewProject,
         editProject: EventHandler.handleEditProject,
         deleteProject: EventHandler.handleDeleteProject,
-        submitEditProject: EventHandler.handleSubmitEditProject
+        submitEditProject: EventHandler.handleSubmitEditProject,
+        focusProject: EventHandler.handleFocusProject,
+        home: EventHandler.handleHome
     };
     
     static init() {
@@ -265,7 +267,6 @@ export default class EventHandler {
     }
 
     static handleEditProject(e) {
-        console.log('YOU clicked the project EDIT button');
         const projectCard = e.target.closest('.card-container');        
         const id = projectCard.id;
         const dialog = document.getElementById('dialog-edit-project');
@@ -287,11 +288,21 @@ export default class EventHandler {
         dialog.close();
     }
     static handleDeleteProject(e) {
-        const projectCard = e.target.closest('.card-container');        
+        const projectCard = e.target.closest('.card-container');
+        const projectSidebar = document.querySelector(`[data-project-id="${projectCard.id}"]`);        
         const id = projectCard.id;
 
         ProjectManager.deleteProject(id);
         projectCard.remove();
+        projectSidebar.remove();
+
+    }
+    static handleFocusProject(e) {
+        const id = e.target.dataset.projectId;
+        UI.focusProject(id);
+    }
+    static handleHome(e) {
+        UI.renderHome();
     }
 
 }
