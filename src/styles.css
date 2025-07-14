@@ -162,6 +162,23 @@ details .expanded-details-container {
     font-size: 0.8rem;
     /* padding-left: 0.5rem; */
 }
+.priority {
+    border-radius: 10px;
+    width: 55%;
+    padding-left: 5px;
+    padding-bottom: 2px;
+}
+/* Priority colors */
+[data-priority='low'] {
+    background-color: var(--color-sup-hover-lightblue);
+}
+[data-priority='medium'] {
+    background-color: yellow
+}
+[data-priority='high'] {
+    background-color: red;
+    color: black;
+}
 .card-task-item.add-new-task {
     text-wrap: nowrap;
     cursor: pointer;

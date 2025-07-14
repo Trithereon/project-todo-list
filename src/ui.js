@@ -90,6 +90,7 @@ const UI = (() => {
         input.name = 'taskComplete';
         input.dataset.action = 'taskComplete';
         dueDate.datetime = task.dueDate; // Need to convert the dueDate value format before assigning here.
+        priority.dataset.priority = task.priority;
         imgDetailsRight.width = '18';
         imgDetailsRight.height = '18';
         imgDetailsRight.src = detailsRightImg;
