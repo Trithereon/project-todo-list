@@ -116,7 +116,15 @@ const UI = (() => {
 
     }
 
-    return {renderProject, renderTask, renderSidebarProject};
+    const updateProject = (id, title) => {
+        const projectCard = document.getElementById(id);
+        const currentTitle = projectCard.querySelector('h3.card-project-title');
+        currentTitle.textContent = title;
+
+        return;
+    }
+
+    return {renderProject, renderTask, renderSidebarProject, updateProject};
 
 })();
 

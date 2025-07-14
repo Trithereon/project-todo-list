@@ -20,7 +20,8 @@ export default class EventHandler {
         submitEditTask: EventHandler.handleSubmitEditTask,
         submitNewProject: EventHandler.handleSubmitNewProject,
         editProject: EventHandler.handleEditProject,
-        deleteProject: EventHandler.handleDeleteProject
+        deleteProject: EventHandler.handleDeleteProject,
+        submitEditProject: EventHandler.handleSubmitEditProject
     };
     
     static init() {
@@ -265,6 +266,25 @@ export default class EventHandler {
 
     static handleEditProject(e) {
         console.log('YOU clicked the project EDIT button');
+        const projectCard = e.target.closest('.card-container');        
+        const id = projectCard.id;
+        const dialog = document.getElementById('dialog-edit-project');
+        dialog.dataset.projectId = id;
+        dialog.showModal();        
+    }
+    static handleSubmitEditProject(e) {
+        e.preventDefault();
+        const dialog = document.getElementById('dialog-edit-project');
+        const form = dialog.querySelector('form');
+        const id = dialog.dataset.projectId;
+        const project = ProjectManager.getProjectById(id);
+        project.title = form.elements['title'].value;
+        
+        // Update project title in DOM.
+        UI.updateProject(id, project.title);
+
+        form.reset();
+        dialog.close();
     }
     static handleDeleteProject(e) {
         const projectCard = e.target.closest('.card-container');        

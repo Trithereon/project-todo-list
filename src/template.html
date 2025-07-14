@@ -170,6 +170,17 @@
                 <button id="cancel-create-new-project" data-action="cancel">Cancel</button>
             </form>
         </dialog>
+        <dialog id="dialog-edit-project">
+            <p>Edit Project (* required)</p>
+            <form id="form-edit-project">
+                <div>
+                    <label for="project-title">Title*:</label>
+                    <input type="text" id="project-title" name="title" required autofocus>
+                </div>
+                <button id="submit-edit-project" type="submit" data-action="submitEditProject">Submit</button>
+                <button id="cancel-edit-project" data-action="cancel">Cancel</button>
+            </form>
+        </dialog>
     </main>
 </div>
 </body>
