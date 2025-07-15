@@ -238,6 +238,9 @@ export default class EventHandler {
         currentTaskContainer.remove();
 
         // Append task with new information to DOM.
+        // Making this an if statement to avoid an error, in the case where a different project is in focus.
+        // In that case, "newlySelectedProjectCard" will be undefined, since it's not in the DOM.
+        if (newlySelectedProjectCard){
         newlySelectedProjectCard
             .querySelector('.card-task-list')
             .appendChild(
@@ -245,7 +248,7 @@ export default class EventHandler {
                     newlySelectedProject.getTaskList()[currentIndex],
                     newlySelectedProjectId
                 ));
-        
+        }
 
         form.reset();
         dialog.close();

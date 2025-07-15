@@ -133,7 +133,7 @@ h3.card-project-title {
     margin-bottom: 0;
     padding-bottom: 0;
     letter-spacing: 2px;
-    font-weight: 400;
+    font-weight: 500;
 }
 ul.card-task-list {
     display: grid;
@@ -146,6 +146,7 @@ ul.card-task-list {
     grid-column: span 3;
     grid-template-columns: 0.8rem 1fr 4rem;
     gap: 0.8rem;
+    font-weight: 400;
 }
 
 /* Careful, the next rule relies on very specific HTML element usage. 
@@ -164,9 +165,12 @@ details .expanded-details-container {
 }
 .priority {
     border-radius: 10px;
-    width: 55%;
-    padding-left: 5px;
-    padding-bottom: 2px;
+    width: fit-content;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 3px;
+    padding-top: 2px;
+    text-wrap: nowrap;
 }
 /* Priority colors */
 [data-priority='low'] {
