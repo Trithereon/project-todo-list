@@ -5,6 +5,7 @@ import editImg from './img/card/edit.svg';
 import deleteImg from './img/card/delete.svg';
 import ProjectManager from './project-manager';
 import Project from './project';
+import {format} from 'date-fns'
 
 const UI = (() => {
     // Private function, so underscore prefix.
@@ -13,6 +14,11 @@ const UI = (() => {
         if (classes) element.classList.add(...classes.split(' '));
         if (text) element.textContent = text;
         return element;
+    }
+    const _formatDate = (date) => {
+        const trimmedDate = date.slice(0, 16); // Remove seconds and timezone.
+        const formattedDate = format(new Date(trimmedDate), 'PPp');
+        return formattedDate;
     }
 
     const mainContent = document.getElementById('main-content');
@@ -78,7 +84,8 @@ const UI = (() => {
         const summary = _createElement('summary', '', task.title);
         const expandedDetailsContainer = _createElement('div', 'expanded-details-container');
         const taskDescription = _createElement('p', '', `Details: ${task.details}`);
-        const dueDate = _createElement('time', '', `Due Date: ${task.dueDate}`);
+        const dueDateFormatted = _formatDate(task.dueDate);
+        const dueDate = _createElement('time', '', `Due Date: ${dueDateFormatted}`);
         const priority = _createElement('p', 'priority', `Priority: ${task.priority}`);
         const cardActionsContainer = _createElement('div', 'card-actions-container');
         const imgDetailsRight = _createElement('img', 'card-actions-details');

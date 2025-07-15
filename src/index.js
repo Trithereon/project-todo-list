@@ -6,8 +6,6 @@ import 'modern-normalize/modern-normalize.css';
 import detailsRightImg from './img/card/details-right.svg';
 import detailsDownImg from './img/card/details-down.svg';
 import ProjectManager from './project-manager.js';
-import { differenceInCalendarMonths } from 'date-fns';
-import { differenceInCalendarDaysWithOptions } from 'date-fns/fp';
 import EventHandler from './events.js';
 
 
