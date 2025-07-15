@@ -4,6 +4,7 @@ import detailsRightImg from './img/card/details-right.svg';
 import editImg from './img/card/edit.svg';
 import deleteImg from './img/card/delete.svg';
 import ProjectManager from './project-manager';
+import Project from './project';
 
 const UI = (() => {
     // Private function, so underscore prefix.
@@ -160,7 +161,19 @@ const UI = (() => {
         });
     }
 
-    return {renderProject, renderTask, renderSidebarProject, updateProject, focusProject, renderHome};
+    const refreshTaskList = (projectId) => {
+        const projectCard = document.getElementById(projectId);
+        const taskList = projectCard.querySelector('.card-task-list');
+        // Remove all children of taskList, i.e. all task items.
+        // Replaces all children with just the firstChild, which is "add new Task".
+        taskList.replaceChildren(taskList.firstChild);
+        // Render all tasks in the list.
+        ProjectManager.getProjectById(projectId).getTaskList().forEach(task => {
+            renderTask(task, projectId);
+        })
+    }
+
+    return {renderProject, renderTask, renderSidebarProject, updateProject, focusProject, renderHome, refreshTaskList};
 
 })();
 

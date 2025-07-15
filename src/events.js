@@ -207,21 +207,20 @@ export default class EventHandler {
         const currentProjectId = dialog.dataset.projectId;
         const currentProject = ProjectManager.getProjectById(currentProjectId);
         const currentTask = currentProject.getTaskById(currentTaskId);
-
+        const newlySelectedProjectCard = document.querySelector(`.card-container[id="${newlySelectedProjectId}"]`);
+        const currentTaskContainer = document.querySelector(`.card-task-item[id="${currentTaskId}"]`);
+        const currentProjectCard = currentTaskContainer.closest('.card-container');
+       
         if (!form.checkValidity()){
             form.reportValidity();
             return;
         } 
-        
-        const newlySelectedProjectCard = document.querySelector(`.card-container[id="${newlySelectedProjectId}"]`);
-        const currentTaskContainer = document.querySelector(`.card-task-item[id="${currentTaskId}"]`);
 
         // Once the form is validated, proceed.
         // Pseudocode:
         // if project is modified, delete task and create new task in selected project.
         // else updateTask with new information.
         // In both cases, the UI needs to be updated, i.e. the old removed and the new appended.
-        
         if (newlySelectedProjectId !== currentProjectId) {
             // Add task to new project.
             newlySelectedProject.addTask(title, details, priority, dueDate);
@@ -232,23 +231,15 @@ export default class EventHandler {
             newlySelectedProject.updateTask(currentTaskId, {title: title, details: details, priority: priority, dueDate: dueDate});
         }
 
-        const currentIndex = newlySelectedProject.getTaskList().length - 1;
-        
-        // Remove task with old information from DOM.
-        currentTaskContainer.remove();
-
         // Append task with new information to DOM.
         // Making this an if statement to avoid an error, in the case where a different project is in focus.
         // In that case, "newlySelectedProjectCard" will be undefined, since it's not in the DOM.
-        if (newlySelectedProjectCard){
-        newlySelectedProjectCard
-            .querySelector('.card-task-list')
-            .appendChild(
-                UI.renderTask(
-                    newlySelectedProject.getTaskList()[currentIndex],
-                    newlySelectedProjectId
-                ));
+        // So the task is only removed from the focused project's DOM.
+        if (newlySelectedProjectCard) {
+            // Remove tasks and render a new task list.
+            UI.refreshTaskList(newlySelectedProjectId);
         }
+        else currentTaskContainer.remove();
 
         form.reset();
         dialog.close();
