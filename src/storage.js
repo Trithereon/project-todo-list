@@ -1,7 +1,4 @@
-/* 
-    I can't save objects, since functions can't go through JSON.stringify
-    What can I save instead, that would allow me to rebuild the site from data?
-*/
+// Module for handling localStorage.
 import Project from './project';
 import ProjectManager from './project-manager';
 import UI from './ui';

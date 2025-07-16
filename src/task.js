@@ -15,7 +15,7 @@ export default class Task {
     updateDetails(newDetails) {
         // Template: Object.assign(target, source)
         // where source is an object with properties I want to apply.
-        // I think that only specified properties are modified.
+        // Only specified properties are modified.
         Object.assign(this, newDetails);
     }
 }

@@ -1,4 +1,4 @@
-// DOM manipulation
+// DOM manipulation module. Written as an IIFE instead of a class, for practice.
 
 import detailsRightImg from './img/card/details-right.svg';
 import editImg from './img/card/edit.svg';

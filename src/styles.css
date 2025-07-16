@@ -4,7 +4,6 @@
     --color-primary-bg-lightcream:#fffefa;
     /* --color-primary-sidebar-bg-blue: #0078d4; "The over-used blue" */
     --color-primary-sidebar-bg-blue: #0067b5;
-    --color-primary-lines-blue: #2563EB;
     --color-primary-accents-orange: #F59E0B;
     --color-primary-text-darkblue: #1E3A8A;
 
@@ -13,7 +12,6 @@
     --color-sup-hover-lightblue: #bedaff;
     --color-sup-bg-cream: #FDF6E3;
     --color-sup-check-green: #10B981;
-    --color-sup-delete-red: #EF4444;
 }
 
 body {

@@ -12,15 +12,11 @@ export default class ProjectManager {
 
     static getProjectById(id) {
         const project = this.projects.find(project => project.id === id);
-        // console.log(project);
-        // console.log("the above output is the value project from getprojectById method in Project");
         return project;
     }
 
     static updateProject(id, newDetails) {
         const projectToBeUpdated = getProjectById(id);
-        // console.log(projectToBeUpdated);
-        // console.log('the above output is "projectToBeUpdated" inside updateProject in Project class');
         projectToBeUpdated.updateDetails(newDetails);
     }
 

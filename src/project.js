@@ -18,8 +18,6 @@ export default class Project {
 
     getTaskById(id) {
         const task = this.tasks.find(task => task.id === id);
-        // console.log(task);
-        // console.log("the above output is the value task from getTaskById method in Project");
         return task;
     }
 
