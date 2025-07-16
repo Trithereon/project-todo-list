@@ -1,6 +1,7 @@
-import UI from './ui.js';
+import UI from './ui';
 import Task from './task';
 import Project from './project';
+import Storage from './storage';
 import './styles.css';
 import 'modern-normalize/modern-normalize.css';
 import detailsRightImg from './img/card/details-right.svg';
@@ -11,7 +12,7 @@ import EventHandler from './events.js';
 
 // Class tests and placeholder items.
 
-const defaultProject = new Project('Unassigned tasks');
+/* const defaultProject = new Project('Unassigned tasks');
 const project1 = new Project('Home Renovation');
 const project2 = new Project('Website Launch');
 const project3 = new Project('Fitness Goals');
@@ -206,16 +207,10 @@ ProjectManager.addProject(project2);
 ProjectManager.addProject(project3);
 ProjectManager.addProject(project4);
 
-ProjectManager.getProjectList().forEach(project => {
-    UI.renderProject(project);
-    UI.renderSidebarProject(project);
+localStorage.setItem('projectList', JSON.stringify(ProjectManager.getProjectList())); */
 
-    project.getTaskList().forEach(task => {
-        UI.renderTask(task, project.id);
-    });
-
-});
-
+Storage.init();
+Storage.rebuildFromData();
 EventHandler.init();
 
 // console.log('Adding a task to Project...');

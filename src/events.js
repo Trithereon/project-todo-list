@@ -4,6 +4,7 @@ import detailsDownImg from './img/card/details-down.svg';
 import ProjectManager from './project-manager';
 import UI from './ui';
 import Project from './project';
+import Storage from './storage';
 
 export default class EventHandler {
     static actionHandlers = {
@@ -90,6 +91,7 @@ export default class EventHandler {
         const currentProject = ProjectManager.getProjectById(projectContainer.id);
         currentProject.deleteTask(taskContainer.id); // Delete from array.
         taskContainer.remove(); // Delete from DOM.
+        Storage.storeData();
     }
     static handleTaskComplete(e) {
         const taskContainer = e.target.closest('.card-task-item');
@@ -97,6 +99,7 @@ export default class EventHandler {
         const currentProject = ProjectManager.getProjectById(projectContainer.id);
         const currentTask = currentProject.getTaskById(taskContainer.id);
         currentTask.toggleComplete();
+        Storage.storeData();
     }
     static handleCardNewTask(e) {
         const projectContainer = e.target.closest('.card-container');
@@ -161,6 +164,7 @@ export default class EventHandler {
             ));
         form.reset();
         dialog.close();
+        Storage.storeData();
     }
     static handleSubmitNavTask(e) {
         e.preventDefault();
@@ -192,6 +196,7 @@ export default class EventHandler {
                 ));
         form.reset();
         dialog.close();
+        Storage.storeData();
     }
     static handleSubmitEditTask(e) {
         e.preventDefault();
@@ -243,6 +248,7 @@ export default class EventHandler {
 
         form.reset();
         dialog.close();
+        Storage.storeData();
     }
 
     static handleSubmitNewProject(e) {
@@ -258,6 +264,7 @@ export default class EventHandler {
 
         form.reset();
         dialog.close();
+        Storage.storeData();
     }
 
     static handleEditProject(e) {
@@ -280,6 +287,7 @@ export default class EventHandler {
 
         form.reset();
         dialog.close();
+        Storage.storeData();
     }
     static handleDeleteProject(e) {
         const projectCard = e.target.closest('.card-container');
@@ -289,13 +297,13 @@ export default class EventHandler {
         ProjectManager.deleteProject(id);
         projectCard.remove();
         projectSidebar.remove();
-
+        Storage.storeData();
     }
     static handleFocusProject(e) {
         const id = e.target.dataset.projectId;
         UI.focusProject(id);
     }
-    static handleHome(e) {
+    static handleHome() {
         UI.renderHome();
     }
 

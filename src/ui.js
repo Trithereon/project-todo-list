@@ -16,9 +16,12 @@ const UI = (() => {
         return element;
     }
     const _formatDate = (date) => {
+        if (date){
         const trimmedDate = date.slice(0, 16); // Remove seconds and timezone.
         const formattedDate = format(new Date(trimmedDate), 'PPp');
         return formattedDate;
+        }
+        else return '';
     }
 
     const mainContent = document.getElementById('main-content');
@@ -158,10 +161,15 @@ const UI = (() => {
         document.querySelectorAll('.card-container').forEach(element => {
             element.remove();
         });
-        // Render all project cards.
+        // Remove all sidebar items.
+        document.querySelectorAll('.nav-sub-item').forEach(element => {
+            if (element.id !== 'sidebar-create-new-project') element.remove();
+        });
+        // Render all project cards and sidebar items.
         ProjectManager.getProjectList().forEach(project => {
             renderProject(project);
-            // Render all tasks for each project.
+            renderSidebarProject(project);
+            // Render all tasks for each project card.
             project.getTaskList().forEach(task => {
                 renderTask(task, project.id);
             });

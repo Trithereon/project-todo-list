@@ -29,4 +29,8 @@ export default class ProjectManager {
         // The if statement only performs a splice if a valid index is found.
         if (projectIndex !== -1) this.projects.splice(projectIndex, 1); 
     }
+
+    static nukeProjects() {
+        this.projects = [];
+    }
 }

@@ -1,14 +1,14 @@
 import Task from "./task";
 
 export default class Project {
-    constructor(title) {
+    constructor(title, id) {
         this.title = title;
-        this.id = crypto.randomUUID();
+        this.id = id || crypto.randomUUID();
         this.tasks = [];
     }
 
-    addTask(title, details, priority, dueDate) {
-        const task = new Task(title, details, priority, dueDate);
+    addTask(title, details, priority, dueDate, id, isComplete) {
+        const task = new Task(title, details, priority, dueDate, id, isComplete);
         this.tasks.push(task);
     }
 
