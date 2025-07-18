@@ -241,6 +241,8 @@ dialog {
     border-right: 3px solid var(--color-primary-accents-orange);
     border-radius: 30px;
     box-shadow: 1px 1px 5px var(--color-sup-smalltext-gray);
+    min-width: 350px;
+    max-width: 500px;
 }
 form {
     display: grid;
@@ -271,4 +273,40 @@ form button#submitButton {
 }
 form button#cancelButton {
     grid-column: 2 / 3;
+}
+form div input[name="title"],
+form div input[name="details"] {
+    min-width: 300px;
+}
+button.confirm-delete {
+    background-color: #780606;
+    color: var(--color-primary-bg-lightcream);
+    border-radius: 10px;
+    border: 2px solid black;
+    width: 5rem;
+}
+button.cancel {
+    background-color: var(--color-primary-sidebar-bg-blue);
+    color: var(--color-primary-bg-lightcream);
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: none;
+    width: 6rem;
+}
+dialog>p {
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+}
+dialog#dialog-confirm-delete:modal {
+    min-width: 200px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 1rem;
+}
+dialog#dialog-confirm-delete p {
+    grid-column: span 2;
 }

@@ -24,7 +24,8 @@ export default class EventHandler {
         deleteProject: EventHandler.handleDeleteProject,
         submitEditProject: EventHandler.handleSubmitEditProject,
         focusProject: EventHandler.handleFocusProject,
-        home: EventHandler.handleHome
+        home: EventHandler.handleHome,
+        confirmDelete: EventHandler.handleConfirmDelete
     };
     
     static init() {
@@ -85,13 +86,10 @@ export default class EventHandler {
         dialog.showModal();
     }
     static handleDelete(e) {
-        // Consider adding a confirmation modal to make user confirm deletion.
-        const taskContainer = e.target.closest('.card-task-item');
-        const projectContainer = taskContainer.closest('.card-container');
-        const currentProject = ProjectManager.getProjectById(projectContainer.id);
-        currentProject.deleteTask(taskContainer.id); // Delete from array.
-        taskContainer.remove(); // Delete from DOM.
-        Storage.storeData();
+        const dialog = document.getElementById('dialog-confirm-delete');
+        dialog.dataset.delete = 'task';
+        dialog.dataset.taskId = e.target.closest('.card-task-item').id;
+        dialog.showModal();
     }
     static handleTaskComplete(e) {
         const taskContainer = e.target.closest('.card-task-item');
@@ -132,7 +130,10 @@ export default class EventHandler {
         dialog.showModal();     
     }
     static handleCancel(e) {
-        e.target.closest('form').reset();
+        if (e.target.closest('form')){
+            e.target.closest('form').reset();
+        }
+
         e.target.closest('dialog').close();
     }
     static handleSubmitCardTask(e) {
@@ -290,14 +291,11 @@ export default class EventHandler {
         Storage.storeData();
     }
     static handleDeleteProject(e) {
-        const projectCard = e.target.closest('.card-container');
-        const projectSidebar = document.querySelector(`[data-project-id="${projectCard.id}"]`);        
-        const id = projectCard.id;
-
-        ProjectManager.deleteProject(id);
-        projectCard.remove();
-        projectSidebar.remove();
-        Storage.storeData();
+        // Set up before opening confirmation modal.
+        const dialog = document.getElementById('dialog-confirm-delete');
+        dialog.dataset.delete = 'project';
+        dialog.dataset.projectId = e.target.closest('.card-container').id;
+        dialog.showModal();
     }
     static handleFocusProject(e) {
         const id = e.target.dataset.projectId;
@@ -305,6 +303,36 @@ export default class EventHandler {
     }
     static handleHome() {
         UI.renderHome();
+    }
+    static handleConfirmDelete(e) {
+        const dialog = document.getElementById('dialog-confirm-delete');
+
+        if (dialog.dataset.delete === 'project') {
+            // Delete project.
+            const projectId = dialog.dataset.projectId;
+            const projectCard = document.getElementById(projectId);
+            const projectSidebar = document.querySelector(`[data-project-id="${projectId}"]`);        
+            ProjectManager.deleteProject(projectId); // Delete from array.
+            projectCard.remove(); // Delete from DOM.
+            projectSidebar.remove(); // Delete from DOM.
+            Storage.storeData();
+            dialog.dataset.delete = '';
+            dialog.dataset.projectId = '';
+            dialog.close();        
+        } else if (dialog.dataset.delete === 'task') {
+            // Delete task.
+            const taskId = dialog.dataset.taskId;
+            const taskContainer = document.getElementById(taskId);
+            const projectContainer = taskContainer.closest('.card-container');
+            const currentProject = ProjectManager.getProjectById(projectContainer.id);
+            currentProject.deleteTask(taskId); // Delete from array.
+            taskContainer.remove(); // Delete from DOM.
+            Storage.storeData();
+            dialog.dataset.delete = '';
+            dialog.dataset.taskId = '';
+            dialog.close();
+        }
+        else return console.log('You attempted to delete something that is neither a task, nor a project. How?');
     }
 
 }
