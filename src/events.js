@@ -154,7 +154,7 @@ export default class EventHandler {
         } 
         
         // Once the form is validated, proceed.
-        currentProject.addTask(title, details, priority, dueDate, currentProject.id);
+        currentProject.addTask(title, details, priority, dueDate);
         const currentIndex = currentProject.getTaskList().length - 1;
         currentProjectCard
             .querySelector('.card-task-list')
@@ -186,7 +186,7 @@ export default class EventHandler {
         const currentProjectCard = document.querySelector(`.card-container[id="${selectedProject}"]`);
         
         // Once the form is validated, proceed.
-        projectObject.addTask(title, details, priority, dueDate, selectedProject);
+        projectObject.addTask(title, details, priority, dueDate);
         const currentIndex = projectObject.getTaskList().length - 1;
         currentProjectCard
             .querySelector('.card-task-list')
