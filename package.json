@@ -1,5 +1,5 @@
 {
-  "name": "project-todo-list",
+  "name": "template",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Trithereon/project-todo-list.git"
+    "url": "git+https://github.com/Trithereon/template.git"
   },
   "keywords": [],
   "author": "Trithereon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Trithereon/project-todo-list/issues"
+    "url": "https://github.com/Trithereon/template/issues"
   },
-  "homepage": "https://github.com/Trithereon/project-todo-list#readme",
+  "homepage": "https://github.com/Trithereon/template#readme",
   "devDependencies": {
     "css-loader": "^7.1.2",
     "gh-pages": "^6.3.0",
