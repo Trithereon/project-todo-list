@@ -1,0 +1,104 @@
+Notes on getting started with TODO LIST project.
+
+- I want to use constructor/classes for an OOP style as opposed to functional style, for todo object creation.
+
+- My todo list items should contain properties for:
+    title
+    description
+    dueDate
+    priority
+    *optional: notes
+    *optional: checklist
+    *optional: subtasks
+
+- I want "projects" that each group their own todo lists.
+
+- Users can create projects, todos, assign todos to projects. There must be a default project if none is selected.
+
+- Need separate modules for application logic and DOM manipulation.
+
+- UI minimum requirements:
+    - View all projects.
+    - View all todos in each project (probably just the title and duedate… perhaps changing color for different priorities).
+    - Expand a single todo to see/edit its details.
+    - Delete a todo.
+
+- Install webpack and date-fns (for formatting and manipulating date/time)
+
+- Created projects and todos must be stored in localStorage.
+    - Function to save projects and todos every time one is created.
+    - Function to look for that data in localStorage when the app is first loaded.
+    - Ensure the app doesn't crash if looking for data fails (need a fallback).
+    - To inspect saved data in localStorage in devtools, go to Application tab > Storage > Local Storage.
+    - localStorage uses JSON to send, store and retrieve data. JSON can't store functions, so how will I add methods to my object properties once I fetch them? 
+
+Draft of website structure
+
+    Sidebar with nav. I'm thinking:
+        User
+        + Add Task
+        Search
+        Projects ("Main Board", homepage)
+        + Add Project
+        -Unassigned tasks
+        -Project1
+        -Project2
+
+    The Main Board page or maybe just "Projects" page is the homepage and displays the projects as cards, with task lists.
+
+    Each task is assigned to a project. Either the default project (unassigned tasks) or an existing project. 
+    Project cards list the tasks. The projects can be dragged and dropped, to re-order the main board.
+    The tasks can be dragged and dropped onto a project, to assign them to that project.
+    Alternatively, the task edit section (modal? three dots menu > edit, delete?) has a dropdown with project names.
+
+    Ideas:
+    - Implement HTML5 DnD API for drag and drop.
+    - Drag and drop project cards in 2D to reorder them.
+    - Drag and drop tasks to assign them to a project.
+    - Alternative to drag and drop: task editing window.
+    - Each task is assigned to a project.
+    - Default project "Unassigned tasks" or existing project.
+    - Project cards list the tasks.
+    - Tasks should order by priority.
+    - Task color should be based on priority.
+    - Project color should be randomly assigned.
+    - Project color can be user assigned.
+
+    Step 1
+    HTML and CSS template page.
+
+    Step 2
+    Modules to create tasks:
+        1. Application logic
+        2. DOM Manipulation
+        3. Storage
+        4. Event handling
+
+    Remaining tasks to complete:
+        -Edit mode
+        Maybe make the card modal reappear but have it prefilled with the current values of the object.
+        ALMOST THERE! I just need to create a new dialog for EDIT mode, with different Submit button functionality.
+        DONE!
+        
+        -Create new project button
+        Make a sidebar modal with project details (minimal)
+
+        -Delete projects option
+        Add card actions next to projects. Maybe just edit and delete, since there aren't details.
+
+        -Render sidebar project list
+        Requirements:
+        + Be clickable
+        + When clicked, delete entire main content, then render the selected project only.
+        + Delete when the project card is deleted.
+
+        -Implement localStorage
+
+        -Change date format output
+        To PPpp I think, using date-fns.
+
+
+
+
+
+

@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
     <link rel="manifest" href="./img/favicon/site.webmanifest">
-    <title>Template</title>
+    <title>Taskaroni</title>
 </head>
 <body>
  <div class="main-wrapper">
@@ -16,7 +16,7 @@
     <aside class="sidebar-wrapper" id="sidebar-wrapper">
         <div class="sidebar-header">
             <button class="sidebar-action" id="site-title" data-action="home">
-            Template
+            Taskaroni
             </button>
             <a href="https://www.flaticon.com/free-icons/macaroni" title="macaroni icons">
                 <img src="./img/site-logo.png" alt="Macaroni logo" class="site-logo">
@@ -73,6 +73,104 @@
                 <button id="submit-button-card-task" type="submit" data-action="submitCardTask">Submit</button>
                 <button id="cancel-button-card-task" data-action="cancel">Cancel</button>
             </form>
+        </dialog>
+        <dialog id="dialog-card-edit-task">
+            <p>Edit Task (* required)</p>
+            <form id="form-card-edit-task">
+                <div>
+                    <label for="title-card-edit-task">Title*:</label>
+                    <input type="text" id="title-card-edit-task" name="title" required autofocus>
+                </div>
+                <div>
+                    <label for="details-card-edit-task">Details:</label>
+                    <textarea type="text" id="details-card-edit-task" name="details"></textarea>
+                </div>
+                <div>
+                    <label for="dueDate-card-edit-task">Due Date:</label>
+                    <input type="datetime-local" id="dueDate-card-edit-task" name="dueDate">
+                </div>
+                <div>
+                    <label for="priority-card-edit-task">Priority:</label>
+                    <select id="priority-card-edit-task" name="priority">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="project-card-edit-task">Project:</label>
+                    <select id="project-card-edit-task" name="project">
+                        <!-- Need options here to be generated from project list -->
+                    </select>
+                </div>
+                <button id="submit-button-card-edit-task" type="submit" data-action="submitEditTask">Submit</button>
+                <button id="cancel-button-card-edit-task" data-action="cancel">Cancel</button>
+            </form>
+        </dialog>
+
+        <dialog id="dialog-nav-create-new-task">
+            <p>Add New Task (* required)</p>
+            <form id="form-nav-create-new-task">
+                <div>
+                    <label for="title-nav-task">Title*:</label>
+                    <input type="text" id="title-nav-task" name="title" required autofocus>
+                </div>
+                <div>
+                    <label for="details-nav-task">Details:</label>
+                    <textarea type="text" id="details-nav-task" name="details"></textarea>
+                </div>
+                <div>
+                    <label for="dueDate-nav-task">Due Date:</label>
+                    <input type="datetime-local" id="dueDate-nav-task" name="dueDate">
+                </div>
+                <div>
+                    <label for="priority-nav-task">Priority:</label>
+                    <select id="priority-nav-task" name="priority">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="project-nav-task">Project:</label>
+                    <select id="project-nav-task" name="project">
+                        <!-- Need options here to be generated from project list -->
+                    </select>
+                </div>
+                <button id="submit-button-nav-task" type="submit" data-action="submitNavTask">Submit</button>
+                <button id="cancel-button-nav-task" data-action="cancel">Cancel</button>
+            </form>
+        </dialog>
+        <dialog id="dialog-create-new-project">
+            <p>Add New Project (* required)</p>
+            <form id="form-create-new-project">
+                <div>
+                    <label for="project-title">Title*:</label>
+                    <input type="text" id="project-title" name="title" required autofocus>
+                </div>
+                <button id="submit-create-new-project" type="submit" data-action="submitNewProject">Submit</button>
+                <button id="cancel-create-new-project" data-action="cancel">Cancel</button>
+            </form>
+        </dialog>
+        <dialog id="dialog-edit-project">
+            <p>Edit Project (* required)</p>
+            <form id="form-edit-project">
+                <div>
+                    <label for="project-title">Title*:</label>
+                    <input type="text" id="project-title" name="title" required autofocus>
+                </div>
+                <button id="submit-edit-project" type="submit" data-action="submitEditProject">Submit</button>
+                <button id="cancel-edit-project" data-action="cancel">Cancel</button>
+            </form>
+        </dialog>
+        <dialog id="dialog-confirm-delete">
+            <p>
+                Are you sure?
+            </p>
+            <button id="button-confirm-delete" class="confirm-delete" data-action="confirmDelete">Delete</button>
+            <button id="cancel-delete" class="cancel" data-action="cancel">Cancel</button>
         </dialog>
     </main>
 </div>
