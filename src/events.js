@@ -272,7 +272,9 @@ export default class EventHandler {
         const projectCard = e.target.closest('.card-container');        
         const id = projectCard.id;
         const dialog = document.getElementById('dialog-edit-project');
+        const form = dialog.querySelector('form');
         dialog.dataset.projectId = id;
+        form.elements['title'].value = ProjectManager.getProjectById(id).title;
         dialog.showModal();        
     }
     static handleSubmitEditProject(e) {

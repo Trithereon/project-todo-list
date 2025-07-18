@@ -242,7 +242,6 @@ dialog {
     border-radius: 30px;
     box-shadow: 1px 1px 5px var(--color-sup-smalltext-gray);
     min-width: 350px;
-    max-width: 500px;
 }
 form {
     display: grid;
@@ -275,7 +274,7 @@ form button#cancelButton {
     grid-column: 2 / 3;
 }
 form div input[name="title"],
-form div input[name="details"] {
+form div textarea[name="details"] {
     min-width: 300px;
 }
 button.confirm-delete {
