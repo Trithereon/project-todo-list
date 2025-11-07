@@ -21,10 +21,10 @@ export default class Storage {
         const project4 = new Project('Summer Vacation Planning');
 
         defaultProject.addTask(
-            'Buy a house', 
-            'Get a job that you feel passionate about and work hard, to make enough money to buy a house in the 400k range, or more, if you have a girlfriend that makes money.',
+            'Quantum widget calibration', 
+            'Carefully fine-tune quantum widgets to achieve precise optimal flux alignment and ensure maximum operational efficiency.',
             'medium',
-            '2019-09-18T19:00:52Z'
+            '2026-09-18T19:00:52Z'
         );
         // Home Renovation tasks
         project1.addTask(
